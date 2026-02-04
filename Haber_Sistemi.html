@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haber</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body { background-color: #ffffff; color: #1a1a1a; }
+
+        /* --- ÜST MENÜ SİYAH TEMA --- */
+        header {
+            width: 100%;
+            height: 70px;
+            background-color: #000000;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            color: #ffffff;
+        }
+
+        .left-side { display: flex; align-items: center; gap: 20px; }
+
+        .menu-btn {
+            background: #222;
+            border: 1px solid #444;
+            color: #ffffff;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 4px;
+        }
+
+        .logo { font-weight: 800; font-size: 22px; color: #ffffff; text-decoration: none; letter-spacing: -1px; }
+
+        /* Kategoriler Solda */
+        nav ul { display: flex; list-style: none; gap: 12px; }
+        nav ul li a { text-decoration: none; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+        /* Finans ve Arama Sağda */
+        .right-side { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+
+        .finance-bar {
+            display: flex;
+            gap: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            border-right: 1px solid #333;
+            padding-right: 20px;
+        }
+        .finance-item span { color: #888; margin-right: 3px; }
+        .finance-item b { color: #2ecc71; }
+
+        .search-box { position: relative; display: flex; align-items: center; }
+        .search-input {
+            padding: 8px 15px 8px 35px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            border-radius: 20px;
+            width: 150px;
+            outline: none;
+            font-size: 12px;
+        }
+        .search-icon { position: absolute; left: 12px; font-size: 12px; color: #666; }
+
+        /* --- İÇERİK YAPISI --- */
+        #menuPanel {
+            position: fixed;
+            top: 70px; left: 0; width: 100%;
+            background: #fff; border-bottom: 2px solid #f0f0f0;
+            display: none; z-index: 1000; padding: 30px 0;
+        }
+        .panel-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 0 20px; }
+        .panel-item { text-decoration: none; color: #333; font-weight: 700; padding: 10px; border-radius: 5px; }
+
+        .main-wrapper {
+            max-width: 1450px;
+            margin: 25px auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .side-col, .center-col { display: flex; flex-direction: column; gap: 20px; }
+
+        .card { border: 1px solid #eeeeee; background: #fff; display: flex; flex-direction: column; cursor: pointer; transition: 0.2s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+
+        .img-area { width: 100%; background-color: #f4f4f4; overflow: hidden; height: 130px; }
+        .center-col .img-area { height: 260px; }
+        .img-area img { width: 100%; height: 100%; object-fit: cover; }
+
+        .content { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+        .cat-tag { color: #c00; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+        h3 { font-size: 15px; line-height: 1.3; margin-bottom: 8px; }
+        h2 { font-size: 22px; line-height: 1.2; margin-bottom: 10px; }
+
+        .summary { font-size: 13px; color: #666; line-height: 1.5; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; }
+        .center-col .summary { -webkit-line-clamp: 3; }
+        .importance { margin-top: auto; padding-top: 10px; font-size: 11px; color: #aaa; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div id="menuPanel">
+    <div class="panel-content">
+        <a href="#" class="panel-item">⚽ Spor</a><a href="#" class="panel-item">🏛️ Siyaset</a>
+        <a href="#" class="panel-item">📈 Borsa</a><a href="#" class="panel-item">🌍 Gündem</a>
+        <a href="#" class="panel-item">🎭 Magazin</a><a href="#" class="panel-item">🧬 Bilim</a>
+        <a href="#" class="panel-item">🎮 Eğlence</a><a href="#" class="panel-item">🚑 Sağlık</a>
+    </div>
+</div>
+
+<header>
+    <div class="left-side">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <a href="#" class="logo">HABER AI</a>
+        <nav>
+            <ul>
+                <li><a href="#">Spor</a></li><li><a href="#">Siyaset</a></li>
+                <li><a href="#">Borsa</a></li><li><a href="#">Gündem</a></li>
+                <li><a href="#">Magazin</a></li><li><a href="#">Bilim</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="right-side">
+        <div class="finance-bar">
+            <div class="finance-item"><span>$</span> <b>30.25</b></div>
+            <div class="finance-item"><span>€</span> <b>32.80</b></div>
+            <div class="finance-item"><span>AU</span> <b>2045</b></div>
+        </div>
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Haber ara..." class="search-input">
+        </div>
+    </div>
+</header>
+
+<main class="main-wrapper">
+    <div class="side-col">
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Siyaset" alt=""></div><div class="content"><span class="cat-tag">Siyaset</span><h3>Meclis Gündemi</h3><p class="summary">Meclis dijital yasaları görüşmek üzere toplandı...</p><div class="importance">Önem: %50</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Spor" alt=""></div><div class="content"><span class="cat-tag">Spor</span><h3>Derbi Hazırlığı</h3><p class="summary">Takımlar büyük maç öncesi kampa girdi...</p><div class="importance">Önem: %42</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Bilim" alt=""></div><div class="content"><span class="cat-tag">Bilim</span><h3>AI Gelişmeleri</h3><p class="summary">Yeni dil modelleri etik tartışmaları başlattı...</p><div class="importance">Önem: %65</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Gundem" alt=""></div><div class="content"><span class="cat-tag">Gündem</span><h3>Yeni Metro Hattı</h3><p class="summary">Şehrin doğu yakasını merkeze bağlayan hat açıldı...</p><div class="importance">Önem: %48</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Magazin" alt=""></div><div class="content"><span class="cat-tag">Magazin</span><h3>Festival Başlıyor</h3><p class="summary">Uluslararası film festivali görkemli bir törenle açılıyor...</p><div class="importance">Önem: %32</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Saglik" alt=""></div><div class="content"><span class="cat-tag">Sağlık</span><h3>Grip Salgını Uyarısı</h3><p class="summary">Uzmanlar mevsimsel salgınlara karşı vatandaşları uyardı...</p><div class="importance">Önem: %55</div></div></article>
+    </div>
+
+    <div class="center-col">
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/600x260?text=Manset+1" alt=""></div><div class="content"><span class="cat-tag">Manşet</span><h2>Haber AI Uygulaması Yayında</h2><p class="summary">Grup üyeleri tarafından geliştirilen platform, AI destekli özetleme ve analizde %95 başarı oranına ulaştı.</p><div class="importance">Önem Seviyesi: %98</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/600x260?text=Teknoloji" alt=""></div><div class="content"><span class="cat-tag">Teknoloji</span><h2>Veri Entegrasyonu Tamamlandı</h2><p class="summary">Backend ekibi RSS parsing süreçlerini başarıyla tamamladı. Tüm haberler artık anlık olarak sisteme akıyor.</p><div class="importance">Önem Seviyesi: %92</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/600x260?text=Ekonomi" alt=""></div><div class="content"><span class="cat-tag">Ekonomi</span><h2>Piyasalarda Haftalık Analiz</h2><p class="summary">Borsa İstanbul ve küresel endekslerdeki son durum AI modelleri tarafından detaylıca raporlandı.</p><div class="importance">Önem Seviyesi: %90</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/600x260?text=AI+Analiz" alt=""></div><div class="content"><span class="cat-tag">Bilim & AI</span><h2>Yapay Zeka Ve İş Dünyası</h2><p class="summary">LLM teknolojilerinin gelecek on yılda iş dünyasını nasıl dönüştüreceğine dair kapsamlı araştırma.</p><div class="importance">Önem Seviyesi: %85</div></div></article>
+    </div>
+
+    <div class="side-col">
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Trafik" alt=""></div><div class="content"><span class="cat-tag">Gündem</span><h3>Trafik Düzenlemesi</h3><p class="summary">Akıllı sinyalizasyon sistemi test edilmeye başlandı...</p><div class="importance">Önem: %58</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Borsa" alt=""></div><div class="content"><span class="cat-tag">Borsa</span><h3>Faiz Kararı</h3><p class="summary">Piyasalar Merkez Bankası'nın açıklamasını bekliyor...</p><div class="importance">Önem: %45</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Sanat" alt=""></div><div class="content"><span class="cat-tag">Magazin</span><h3>Sanat Dünyası</h3><p class="summary">Ünlü oyuncudan yeni proje müjdesi geldi...</p><div class="importance">Önem: %35</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Transfer" alt=""></div><div class="content"><span class="cat-tag">Spor</span><h3>Transfer Gündemi</h3><p class="summary">Yıldız futbolcunun takımıyla yolları ayrılıyor...</p><div class="importance">Önem: %60</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Saat" alt=""></div><div class="content"><span class="cat-tag">Teknoloji</span><h3>Yeni Akıllı Saat</h3><p class="summary">Batarya ömrüyle dikkat çeken model raflarda...</p><div class="importance">Önem: %25</div></div></article>
+        <article class="card"><div class="img-area"><img src="https://via.placeholder.com/300x130?text=Egitim" alt=""></div><div class="content"><span class="cat-tag">Eğitim</span><h3>Hibrit Eğitim Modeli</h3><p class="summary">Üniversitelerde yeni dönem hazırlıkları sürüyor...</p><div class="importance">Önem: %40</div></div></article>
+    </div>
+</main>
+
+<script>
+    function toggleMenu() {
+        const panel = document.getElementById('menuPanel');
+        panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+    }
+    window.onclick = function(event) {
+        const panel = document.getElementById('menuPanel');
+        const btn = document.querySelector('.menu-btn');
+        if (event.target !== panel && event.target !== btn && !panel.contains(event.target)) {
+            panel.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
