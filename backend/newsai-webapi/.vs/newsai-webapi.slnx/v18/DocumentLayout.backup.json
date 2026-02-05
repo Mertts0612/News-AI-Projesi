@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\newsai-webapi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E13BA6C8-7735-4F0B-9598-5CFC04881FF6}|newsai-webapi\\newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\newsai-webapi\\newsai-webapi\\controllers\\healthcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E13BA6C8-7735-4F0B-9598-5CFC04881FF6}|newsai-webapi\\newsai-webapi.csproj|solutionrelative:newsai-webapi\\controllers\\healthcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "healthcontrol.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\newsai-webapi\\newsai-webapi\\Controllers\\healthcontrol.cs",
+              "RelativeDocumentMoniker": "newsai-webapi\\Controllers\\healthcontrol.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\newsai-webapi\\newsai-webapi\\Controllers\\healthcontrol.cs",
+              "RelativeToolTip": "newsai-webapi\\Controllers\\healthcontrol.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T16:31:07Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
