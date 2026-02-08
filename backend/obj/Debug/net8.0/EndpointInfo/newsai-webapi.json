@@ -16,6 +16,28 @@
           }
         }
       }
+    },
+    "/api/News": {
+      "get": {
+        "tags": [
+          "News"
+        ],
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "teknoloji"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": { }

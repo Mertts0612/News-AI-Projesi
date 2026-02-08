@@ -8,5 +8,31 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "GetNews",
+    "RelativePath": "api/News",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "topic",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "GetCurrencies",
+    "RelativePath": "api/News/currencies",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

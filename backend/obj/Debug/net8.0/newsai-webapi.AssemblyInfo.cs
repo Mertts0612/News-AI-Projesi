@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("newsai-webapi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba28cd923b4b73ffba3b429e4bd6ea84467f8f1b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e221cd6465f66eb2932110928494d4a67cd7019a")]
 [assembly: System.Reflection.AssemblyProductAttribute("newsai-webapi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("newsai-webapi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

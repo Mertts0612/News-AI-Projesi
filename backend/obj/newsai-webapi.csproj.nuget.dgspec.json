@@ -50,9 +50,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Swashbuckle.AspNetCore": {
+            "System.ServiceModel.Syndication": {
               "target": "Package",
-              "version": "[6.6.2, )"
+              "version": "[10.0.2, )"
             }
           },
           "imports": [

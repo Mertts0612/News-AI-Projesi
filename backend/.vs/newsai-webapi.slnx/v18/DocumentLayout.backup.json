@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\services\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:services\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CurrencyService.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\CurrencyService.cs",
+              "RelativeDocumentMoniker": "Services\\CurrencyService.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\CurrencyService.cs",
+              "RelativeToolTip": "Services\\CurrencyService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-08T23:32:06.947Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

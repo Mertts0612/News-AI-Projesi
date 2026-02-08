@@ -1,0 +1,37 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using newsai_webapi.Services;
+
+namespace newsai_webapi.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")] 
+    public class NewsController : ControllerBase
+    {
+        private readonly RssService _rssService;
+        private readonly CurrencyService _currencyService;
+
+        public NewsController(RssService rssService, CurrencyService currencyService)
+        {
+            _rssService = rssService;
+            _currencyService = currencyService;
+        }
+
+        [HttpGet]
+        public IActionResult GetNews(string? topic)
+        {
+            var news = _rssService.GetNews(topic ?? "");
+            return Ok(news);
+        }
+
+        [HttpGet("currencies")]
+        public IActionResult GetCurrencies()
+        {
+            var currencies = _currencyService.GetLiveCurrencies();
+            if (currencies == null || !currencies.Any())
+            {
+                return NotFound("Veri yok.");
+            }
+            return Ok(currencies);
+        }
+    }
+}
