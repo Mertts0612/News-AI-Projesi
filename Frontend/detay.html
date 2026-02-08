@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News - Haber Detayı</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #00d4ff;
+            --accent-purple: #9d4edd;
+            --accent-green: #00ff88;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)"/></svg>');
+            z-index: 9999;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .back-nav { margin-bottom: 3rem; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover { color: var(--accent-blue); transform: translateX(-5px); }
+
+        .header-section { margin-bottom: 4rem; }
+        .category-pill {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-blue);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .meta-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .content-body { margin-top: 3rem; }
+        #news-spot {
+            font-size: 1.6rem;
+            color: #fff;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+        #description {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+
+        .ai-note {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--accent-blue);
+            padding: 2rem;
+            margin-top: 4rem;
+            font-style: italic;
+            border-radius: 0 16px 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="container">
+        <nav class="back-nav">
+            <a href="index.html"class="back-link">← GERİ DÖN</a>
+        </nav>
+
+        <div id="loading" style="font-family: 'Space Mono'; color: var(--accent-blue);">AI Verileri İşleniyor...</div>
+
+        <article id="news-article" style="display: none;">
+            <header class="header-section">
+                <span id="category" class="category-pill"></span>
+                <h1 id="title"></h1>
+                <div class="meta-panel">
+                    <div class="meta-item">📅 <span id="date"></span></div>
+                    <div class="meta-item">👁️ <span id="views"></span> GÖRÜNTÜLENME</div>
+                    <div class="meta-item">⏱️ <span id="readTime"></span> OKUMA</div>
+                </div>
+            </header>
+
+            <div id="news-image" style="width: 100%; height: 400px; background: var(--bg-card); border-radius: 24px; margin: 2rem 0; display: flex; align-items: center; justify-content: center; font-size: 5rem; border: 1px solid var(--border);">
+                🤖
+            </div>
+
+            <div class="content-body">
+                <p id="news-spot"></p>
+                <div id="description"></div>
+            </div>
+
+            <div class="ai-note">Bu içerik AI tarafından analiz edilmiştir.</div>
+        </article>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const newsId = parseInt(urlParams.get('id'));
+
+        const mockNews = [
+            { id: 1, title: "OpenAI Yeni GPT-5 Modelini Duyurdu", description: "OpenAI, yapay zeka dünyasında kartları yeniden dağıtacak olan GPT-5 modelini resmen tanıttı. Yeni model, sadece metin tabanlı yanıtlarda değil, aynı zamanda karmaşık matematiksel problemlerin çözümünde ve yazılım geliştirme süreçlerinde insan seviyesinde akıl yürütme becerisi sergiliyor. Önceki modellere göre %60 daha az enerji tüketen GPT-5, büyük veri setlerini saniyeler içinde analiz ederek kullanıcıya özel stratejik raporlar sunabiliyor. OpenAI CEO'su, bu modelin yapay genel zekaya (AGI) giden yolda en büyük adım olduğunu vurguladı.", category: "Model", date: "2 Şubat 2026", views: "12.5K", readTime: "5 dk" },
+            { id: 2, title: "Google Gemini 2.0 Çoklu Modal Yeteneklerle Geliyor", description: "Google'ın en gelişmiş yapay zeka ailesi olan Gemini, 2.0 sürümüyle çoklu modal (multimodal) kavramını bir üst seviyeye taşıyor. Artık sistem, video içeriklerini sadece izlemekle kalmıyor, videodaki olay örgüsünü anlayıp gelecekteki kareleri tahmin edebiliyor. Google DeepMind ekibi tarafından geliştirilen yeni mimari, akıllı telefonlarda internet bağlantısı olmadan dahi yüksek performanslı yapay zeka kullanımına olanak tanıyor. Özellikle çeviri ve eş zamanlı altyazı konularında rakiplerine fark atan Gemini 2.0, kurumsal iş akışlarını %40 hızlandırmayı vaat ediyor.", category: "Teknoloji", date: "1 Şubat 2026", views: "8.3K", readTime: "4 dk" },
+            { id: 3, title: "AI Güvenliği İçin Yeni Küresel Standartlar", description: "Yapay zekanın kontrolsüz gelişimiyle ilgili endişeleri gidermek amacıyla Birleşmiş Milletler öncülüğünde yeni bir küresel güvenlik paktı imzalandı. Aralarında teknoloji devlerinin de bulunduğu 150 ülke, otonom silah sistemlerinin yasaklanması ve derin kurgu (deepfake) içeriklerin dijital olarak etiketlenmesi konusunda mutabakata vardı. Bu anlaşma, yapay zekanın etik kurallar çerçevesinde geliştirilmesini zorunlu kılan ilk uluslararası yasal metin olma özelliğini taşıyor. Uzmanlar, bu adımın insan haklarını korumak adına tarihi bir dönüm noktası olduğunu belirtiyor.", category: "Politika", date: "31 Ocak 2026", views: "15.2K", readTime: "7 dk" },
+            { id: 4, title: "Otonom Araç Teknolojisinde Yapay Zeka Devrimi", description: "Sürücüsüz araç teknolojisinde beklenen 'Seviye 5' otonomi, yeni nesil sinir ağları sayesinde gerçek oldu. Test sürüşlerinde insan sürücülere oranla %90 daha az hata yapan yeni algoritma, şehir trafiğindeki karmaşık senaryoları ve beklenmedik yaya hareketlerini anlık olarak analiz edebiliyor. Tesla ve Waymo'nun ortaklaşa üzerinde çalıştığı yeni sensör füzyon teknolojisi, yoğun sis ve kar yağışı gibi görüşün kısıtlı olduğu durumlarda bile tam güvenli sürüş sağlıyor. Bu gelişme, gelecekte toplu taşımanın tamamen otonom hale gelmesinin önünü açıyor.", category: "Otonom", date: "30 Ocak 2026", views: "9.7K", readTime: "6 dk" },
+            { id: 5, title: "Sağlık Sektöründe AI: Hastalık Teşhisinde Yeni Dönem", description: "Yapay zeka, tıp dünyasında imkansızı başarmaya devam ediyor. Yeni geliştirilen bir AI modeli, genetik verileri ve radyolojik görüntüleri saniyeler içinde tarayarak kanserli hücreleri henüz başlangıç aşamasındayken %98 doğrulukla tespit edebiliyor. Dünyanın önde gelen onkoloji hastanelerinde kullanılmaya başlanan bu sistem, doktorların tedavi planlarını hastaya özel olarak kişiselleştirmesine yardımcı oluyor. Ayrıca, ilaç geliştirme süreçlerini 10 yıldan birkaç aya indiren AI algoritmaları, nadir görülen hastalıklar için umut ışığı haline geldi.", category: "Sağlık", date: "29 Ocak 2026", views: "11.4K", readTime: "8 dk" },
+            { id: 6, title: "AI Sanatında Telif Hakkı Tartışmaları Sürüyor", description: "Yapay zeka tarafından üretilen tablolar, müzikler ve edebi eserler, telif yasalarının yeniden yazılmasına neden oluyor. Avrupa Birliği Fikri Mülkiyet Ofisi, AI tarafından tamamen bağımsız üretilen içeriklerin 'yaratıcı insan müdahalesi' olmadan telif hakkı kazanamayacağına dair bir taslak yayımladı. Sanatçılar ve yazarlar sendikası, veri setlerinde kullanılan eserlerin lisanslanması gerektiğini savunurken, teknoloji şirketleri 'adil kullanım' (fair use) prensibine vurgu yapıyor. Bu hukuki mücadelenin sonucu, geleceğin dijital ekonomisini kökten değiştirecek.", category: "Hukuk", date: "28 Ocak 2026", views: "6.8K", readTime: "5 dk" },
+            { id: 7, title: "Meta'nın Yeni AI Asistanı Milyonlarca Kullanıcıya Ulaştı", description: "Meta AI, Instagram ve WhatsApp üzerinden sunduğu yeni asistan özellikleriyle günlük aktif kullanıcı rekoru kırdı. Llama 4 mimarisi üzerine inşa edilen asistan, sadece soruları yanıtlamakla kalmıyor, kullanıcıların alışkanlıklarına göre tatil planları yapıyor ve fotoğraf düzenleme işlemlerini sesli komutla gerçekleştiriyor. Gizlilik endişelerini gidermek için 'uçtan uca şifrelenmiş AI işleme' yöntemini kullanan Meta, kullanıcı verilerinin eğitim setlerinde kullanılmayacağını garanti etti. Şirket, bu hamleyle kişisel asistan pazarında mutlak liderliği hedefliyor.", category: "Teknoloji", date: "27 Ocak 2026", views: "13.9K", readTime: "4 dk" },
+            { id: 8, title: "Eğitimde Yapay Zeka: Kişiselleştirilmiş Öğrenme Dönemi", description: "Modern eğitim sistemi, her öğrencinin öğrenme hızına uyum sağlayan yapay zeka destekli platformlar sayesinde büyük bir dönüşüm geçiriyor. AI öğretmenler, öğrencinin hangi konularda zorlandığını analiz ederek ona özel ders içerikleri ve interaktif alıştırmalar üretiyor. Pilot bölgelerde yapılan araştırmalar, AI destekli eğitimin öğrenci başarı oranlarını %35 artırdığını gösterdi. Artık tek tip müfredat dönemi kapanırken, her bireyin potansiyelini en üst seviyeye çıkaran esnek ve veri odaklı bir eğitim modeli hayatımıza giriyor.", category: "Eğitim", date: "26 Ocak 2026", views: "7.2K", readTime: "6 dk" }
+        ];
+
+        const news = mockNews.find(item => item.id === newsId);
+
+        if (news) {
+            document.getElementById('title').innerText = news.title;
+            document.getElementById('category').innerText = news.category;
+            document.getElementById('date').innerText = news.date;
+            document.getElementById('views').innerText = news.views;
+            document.getElementById('readTime').innerText = news.readTime;
+            
+            // Spot alanına ilk cümleyi koy
+            document.getElementById('news-spot').innerText = news.description.split('.')[0] + '.';
+            // Description alanına tamamını koy
+            document.getElementById('description').innerText = news.description;
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('news-article').style.display = 'block';
+        } else {
+    document.getElementById('loading').innerHTML = "<h2>Haber bulunamadı!</h2><a href='index.html'>Ana Sayfaya Dön</a>";
+}
+    </script>
+</body>
+</html>
