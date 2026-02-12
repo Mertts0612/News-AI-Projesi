@@ -5,10 +5,10 @@ Projenin bu sürümünde; dinamik arama algoritması, tema yönetim sistemi (Kar
 🛠️ Kurulum ve Çalıştırma Talimatları
 Projenin yerel çalışma ortamında sorunsuz bir şekilde ayağa kaldırılması için aşağıdaki teknik adımların sırasıyla takip edilmesi gerekmektedir:
 Bağımlılıkların Yüklenmesi: Projenin ihtiyaç duyduğu kütüphanelerin kurulması için terminal üzerinden proje dizinine gidiniz ve aşağıdaki komutu çalıştırınız:
-Bash npm install
+npm install
 Bu işlem, projenin çalışması için gerekli olan ancak veri trafiğini optimize etmek amacıyla depoya dahil edilmeyen node_modules dizinini oluşturacaktır.
 Geliştirme Sunucusunun Başlatılması: Kurulum işlemi tamamlandıktan sonra, uygulamayı yerel sunucuda (local server) önizlemek için:
-Bash npm run dev
+npm run dev
 Arayüze Erişim: Terminalde belirtilen yerel adresi (varsayılan: http://localhost:5173) kullanarak uygulamayı tarayıcınız üzerinden görüntüleyebilirsiniz.
 
 📂 Teknik Dosya Yapısı
