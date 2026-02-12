@@ -1,16 +1,20 @@
-# React + Vite
+News-AI-Projesi | Frontend Geliştirme
+Bu dizin, projenin kullanıcı arayüzü (frontend) katmanına ait kaynak kodlarını içermektedir. Uygulama, modern web geliştirme standartlarına uygun olarak React kütüphanesi ve Vite yapılandırma aracı kullanılarak inşa edilmiştir.
+Projenin bu sürümünde; dinamik arama algoritması, tema yönetim sistemi (Karanlık/Aydınlık mod) ve optimize edilmiş haber detay sayfası bileşenleri entegre edilmiştir.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🛠️ Kurulum ve Çalıştırma Talimatları
+Projenin yerel çalışma ortamında sorunsuz bir şekilde ayağa kaldırılması için aşağıdaki teknik adımların sırasıyla takip edilmesi gerekmektedir:
+Bağımlılıkların Yüklenmesi: Projenin ihtiyaç duyduğu kütüphanelerin kurulması için terminal üzerinden proje dizinine gidiniz ve aşağıdaki komutu çalıştırınız:
+Bash npm install
+Bu işlem, projenin çalışması için gerekli olan ancak veri trafiğini optimize etmek amacıyla depoya dahil edilmeyen node_modules dizinini oluşturacaktır.
+Geliştirme Sunucusunun Başlatılması: Kurulum işlemi tamamlandıktan sonra, uygulamayı yerel sunucuda (local server) önizlemek için:
+Bash npm run dev
+Arayüze Erişim: Terminalde belirtilen yerel adresi (varsayılan: http://localhost:5173) kullanarak uygulamayı tarayıcınız üzerinden görüntüleyebilirsiniz.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📂 Teknik Dosya Yapısı
+src/: Uygulamanın çekirdek kaynak kodlarını barındıran ana dizin.
+src/index.css: Global stil tanımlamaları ve görsel tasarım değişkenlerinin bulunduğu CSS dosyası.
+src/components/: Navigasyon çubuğu ve haber kartları gibi yeniden kullanılabilir (reusable) UI bileşenleri.
+src/pages/: Ana sayfa (Home) ve Haber Detay (Detail) gibi sayfa bazlı görünümlerin yönetildiği dizin.
+📝 Önemli Not
+Projenin çalışma bütünlüğü için npm install adımının atlanmaması kritik önem taşımaktadır. Geliştirme sürecinde karşılaşılan teknik aksaklıklar için lütfen ilgili dal (branch) sorumlusu ile iletişime geçiniz.
