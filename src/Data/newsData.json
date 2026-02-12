@@ -1,0 +1,77 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "title": "OpenAI Yeni GPT-5 Modelini Duyurdu",
+      "description": "OpenAI, yapay zeka dünyasında kartları yeniden dağıtacak olan GPT-5 modelini resmen tanıttı. Yeni model, akıl yürütme kapasitesindeki devasa artış ve insan seviyesindeki karmaşık problemleri saniyeler içinde çözebilme yeteneğiyle dikkat çekiyor. Özellikle çok adımlı görevlerde sergilediği performans, yapay genel zekaya (AGI) bir adım daha yaklaştığımızın sinyallerini veriyor.",
+      "category": "Model",
+      "date": "2 Şubat 2026",
+      "views": "12.5K",
+      "readTime": "5 dk",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "Google Gemini 2.0 Çoklu Modal Yeteneklerle Geliyor",
+      "description": "Google'ın en gelişmiş yapay zeka ailesi olan Gemini, 2.0 sürümüyle çoklu modal (multimodal) kavramını bir üst seviyeye taşıyor. Artık metin, görüntü, ses ve videoyu eş zamanlı olarak işleyebilen model, gerçek zamanlı çeviri ve görsel analiz konularında rakiplerine fark atıyor. Geliştiriciler için sunulan yeni API setleri ise uygulama ekosisteminde yeni bir devrim başlatmaya aday.",
+      "category": "Teknoloji",
+      "date": "1 Şubat 2026",
+      "views": "8.3K",
+      "readTime": "4 dk"
+    },
+    {
+      "id": 3,
+      "title": "AI Güvenliği İçin Yeni Küresel Standartlar",
+      "description": "Yapay zekanın kontrolsüz gelişimiyle ilgili endişeleri gidermek amacıyla Birleşmiş Milletler öncülüğünde yeni bir küresel güvenlik paktı imzalandı. 50'den fazla ülkenin katılımıyla oluşturulan bu standartlar, özellikle askeri alandaki AI kullanımı ve veri gizliliği konularında katı kurallar getiriyor. Pakt, teknoloji devlerinin etik denetim süreçlerini şeffaflaştırmasını zorunlu kılıyor.",
+      "category": "Politika",
+      "date": "31 Ocak 2026",
+      "views": "15.2K",
+      "readTime": "7 dk"
+    },
+    {
+      "id": 4,
+      "title": "Otonom Araç Teknolojisinde Yapay Zeka Devrimi",
+      "description": "Sürücüsüz araç teknolojisinde beklenen 'Seviye 5' otonomi, yeni nesil sinir ağları sayesinde gerçek oldu. Zorlu hava koşullarında ve karmaşık şehir trafiğinde bile %99.9 oranında hatasız karar verebilen yeni sistem, ulaşım maliyetlerini düşürürken trafik güvenliğini en üst düzeye çıkarmayı hedefliyor. Test süreçleri tamamlanan araçların yıl sonunda trafiğe çıkması bekleniyor.",
+      "category": "Otonom",
+      "date": "30 Ocak 2026",
+      "views": "9.7K",
+      "readTime": "6 dk"
+    },
+    {
+      "id": 5,
+      "title": "Sağlık Sektöründe AI: Hastalık Teşhisinde Yeni Dönem",
+      "description": "Yapay zeka, tıp dünyasında imkansızı başarmaya devam ediyor. Yeni geliştirilen bir AI modeli, MR ve BT taramalarını analiz ederek hastalıkları henüz belirti vermeden, başlangıç evresinde teşhis edebiliyor. Erken teşhis oranlarında %40'lık bir artış sağlayan bu teknoloji, kişiselleştirilmiş tedavi planlarının oluşturulmasında doktorlara en büyük desteği sunuyor.",
+      "category": "Sağlık",
+      "date": "29 Ocak 2026",
+      "views": "11.4K",
+      "readTime": "8 dk"
+    },
+    {
+      "id": 6,
+      "title": "AI Sanatında Telif Hakkı Tartışmaları Sürüyor",
+      "description": "Yapay zeka tarafından üretilen tablolar, müzikler ve edebi eserler, telif yasalarının yeniden yazılmasına neden oluyor. Sanatçıların veri setleri üzerinde sahip olduğu haklar ve AI çıktılarının mülkiyeti konusu, hukuk dünyasını ikiye bölmüş durumda. Avrupa Birliği'nin hazırladığı yeni yasa tasarısı, sanatçıların eserlerinin eğitim amaçlı kullanımında şeffaflık ve tazminat hakları içeriyor.",
+      "category": "Hukuk",
+      "date": "28 Ocak 2026",
+      "views": "6.8K",
+      "readTime": "5 dk"
+    },
+    {
+      "id": 7,
+      "title": "Meta'nın Yeni AI Asistanı Milyonlarca Kullanıcıya Ulaştı",
+      "description": "Meta AI, Instagram ve WhatsApp üzerinden sunduğu yeni asistan özellikleriyle günlük aktif kullanıcı rekoru kırdı. Kullanıcıların günlük rutinlerini planlayan, içerik önerilerinde bulunan ve doğal dille etkileşim kuran asistan, sosyal medya deneyimini tamamen kişisel bir asistanlık hizmetine dönüştürüyor. Meta, bu başarıyı 'sosyal zeka' döneminin başlangıcı olarak tanımlıyor.",
+      "category": "Teknoloji",
+      "date": "27 Ocak 2026",
+      "views": "13.9K",
+      "readTime": "4 dk"
+    },
+    {
+      "id": 8,
+      "title": "Eğitimde Yapay Zeka: Kişiselleştirilmiş Öğrenme Dönemi",
+      "description": "Modern eğitim sistemi, her öğrencinin öğrenme hızına ve ilgi alanlarına uyum sağlayan yapay zeka destekli platformlar sayesinde büyük bir dönüşüm geçiriyor. AI eğitmenler, öğrencilerin zorlandığı konuları anında tespit ederek onlara özel materyaller hazırlıyor. Bu teknoloji, fırsat eşitliğini artırırken öğretmenlerin üzerindeki idari yükü hafifleterek pedagojiye odaklanmalarını sağlıyor.",
+      "category": "Eğitim",
+      "date": "26 Ocak 2026",
+      "views": "7.2K",
+      "readTime": "6 dk"
+    }
+  ]
+}
