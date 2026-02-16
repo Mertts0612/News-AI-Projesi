@@ -1,20 +1,37 @@
-News-AI-Projesi | Frontend Geliştirme
-Bu dizin, projenin kullanıcı arayüzü (frontend) katmanına ait kaynak kodlarını içermektedir. Uygulama, modern web geliştirme standartlarına uygun olarak React kütüphanesi ve Vite yapılandırma aracı kullanılarak inşa edilmiştir.
-Projenin bu sürümünde; dinamik arama algoritması, tema yönetim sistemi (Karanlık/Aydınlık mod) ve optimize edilmiş haber detay sayfası bileşenleri entegre edilmiştir.
+# News-AI Projesi - Frontend Taslağı
 
-🛠️ Kurulum ve Çalıştırma Talimatları
-Projenin yerel çalışma ortamında sorunsuz bir şekilde ayağa kaldırılması için aşağıdaki teknik adımların sırasıyla takip edilmesi gerekmektedir:
-Bağımlılıkların Yüklenmesi: Projenin ihtiyaç duyduğu kütüphanelerin kurulması için terminal üzerinden proje dizinine gidiniz ve aşağıdaki komutu çalıştırınız:
-npm install
-Bu işlem, projenin çalışması için gerekli olan ancak veri trafiğini optimize etmek amacıyla depoya dahil edilmeyen node_modules dizinini oluşturacaktır.
-Geliştirme Sunucusunun Başlatılması: Kurulum işlemi tamamlandıktan sonra, uygulamayı yerel sunucuda (local server) önizlemek için:
-npm run dev
-Arayüze Erişim: Terminalde belirtilen yerel adresi (varsayılan: http://localhost:5173) kullanarak uygulamayı tarayıcınız üzerinden görüntüleyebilirsiniz.
+Bu proje, yapay zeka ve teknoloji dünyasından en güncel haberleri sunan, modern ve kullanıcı dostu bir haber portalı arayüzüdür. Şu anda API entegrasyonu öncesi tüm  yapısal hazırlıkları tamamlanmış durumdadır.
 
-📂 Teknik Dosya Yapısı
-src/: Uygulamanın çekirdek kaynak kodlarını barındıran ana dizin.
-src/index.css: Global stil tanımlamaları ve görsel tasarım değişkenlerinin bulunduğu CSS dosyası.
-src/components/: Navigasyon çubuğu ve haber kartları gibi yeniden kullanılabilir (reusable) UI bileşenleri.
-src/pages/: Ana sayfa (Home) ve Haber Detay (Detail) gibi sayfa bazlı görünümlerin yönetildiği dizin.
-📝 Önemli Not
-Projenin çalışma bütünlüğü için npm install adımının atlanmaması kritik önem taşımaktadır. Geliştirme sürecinde karşılaşılan teknik aksaklıklar için lütfen ilgili dal (branch) sorumlusu ile iletişime geçiniz.
+Son Yapılan Güncellemeler (Şubat 2026)
+* **Dinamik Görsel Yönetimi:** Haber kartları ve detay sayfası için Unsplash API tabanlı dinamik görsel yapısı kuruldu.
+* **Görsel Hata Yakalama (Robustness):** Resimlerin yüklenememesi durumuna karşı `onError` event'i ile otomatik "Robot Emoji" (fallback) sistemi entegre edildi.
+* **Mock Veri Yapısı:** Gerçek API'den gelecek veriye tam uyumlu `newsData.json` yapısı oluşturuldu.
+
+Kullanılan Teknolojiler
+* **Framework:** React 19
+* **Build Tool:** Vite
+* **Styling:** CSS3 (Custom Variables & Grid/Flexbox)
+* **HTTP Client:** Axios (Backend entegrasyonu için hazır)
+* **Routing:** React Router Dom
+
+Klasör Yapısı
+Proje, bileşen tabanlı bir mimari ile organize edilmiştir:
+- `/src/Home`: Ana sayfa bileşenleri ve stilleri
+- `/src/Details`: Haber detay sayfası yönetimi
+- `/src/Data`: Mock veri (JSON) deposu
+- `/src/[Bileşen Adı]`: Her bileşenin (Home, Details, Header, TopBar, NewsCard) kendi JSX ve CSS dosyalarını içeren özel klasörleri
+
+ Yerel Kurulum
+Projeyi kendi bilgisayarınızda çalıştırmak için:
+
+1. Depoyu klonlayın:
+   `git clone https://github.com/tufancaliskan/ai-news-projesi.git`
+2. Klasöre girin:
+   `cd ai-news-projesi`
+3. Bağımlılıkları yükleyin:
+   `npm install`
+4. Projeyi başlatın:
+   `npm run dev`
+
+---
+© 2026 Tufan Çalışkan - Bilişim Sistemleri Bölümü Projesi
