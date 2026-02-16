@@ -1,0 +1,104 @@
+/**
+ * PROJE: News-AI-Projesi
+ * DOSYA: TopBar.css (Üst Bilgi Çubuğu Bileşeni)
+ * ----------------------------------------------------------------------------
+ * 1. GÖRSEL TEMEL: Üst çubuğun kalıcı koyu arka planını, metin renklerini ve alt sınır çizgisini belirler.
+ * 2. YERLEŞİM SİSTEMİ: Döviz kurları ile canlı gösterge/tarih bilgilerini Flexbox kullanarak iki uca yaslar.
+ * 3. FİNANSAL GÖSTERGELER: Kur bilgilerinin Space Mono font yapısını ve artış/azalış (yeşil/kırmızı) renklerini yönetir.
+ * 4. CANLI YAYIN EFEKTİ: "CANLI" ibaresinin yanındaki kırmızı noktanın nabız (pulse) animasyonunu kontrol eder.
+ * 5. ÖNCELİKLİ STİLLER: Tema değişimlerinden etkilenmemesi gereken kritik renk ayarlarını !important ile koruma altına alır.
+ */
+.top-bar {
+    background-color: #000000 !important;
+}
+.top-bar,
+.top-bar span,
+.top-bar-right span {
+    color: #ffffff !important;
+}
+.currency-up {
+    color: var(--accent-green) !important;
+}
+
+.currency-down {
+    color: var(--accent-red) !important;
+}
+.top-bar {
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0;
+    font-size: 0.85rem;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.currency-ticker {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.currency-label {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.currency-value {
+    font-weight: 700;
+}
+
+.currency-up {
+    color: var(--accent-green);
+}
+
+.currency-down {
+    color: var(--accent-red);
+}
+
+.top-bar-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-red);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
+}
+.currency-up, .currency-item .currency-up { color: var(--accent-green) !important; }
+.currency-down, .currency-item .currency-down { color: var(--accent-red) !important; }
+

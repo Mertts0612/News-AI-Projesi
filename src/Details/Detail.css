@@ -1,0 +1,62 @@
+/* Ana Kapsayıcı */
+.detail-content-container {
+    max-width: 1150px !important; 
+    margin: 0 auto;
+    padding: 0 40px;
+    
+}
+/* Başlık */
+.detail-title {
+    font-size: 3.8rem !important; 
+    line-height: 1.1 !important;
+    text-align: left !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 2rem !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Header Bölümü */
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important; 
+    margin-top: 2rem !important;
+    margin-bottom: 3rem !important;
+    text-align: left !important;
+}
+
+/* İstatistik Paneli*/
+.meta-panel {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-start !important; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    width: 100%;
+}
+/* Görsel Kapsayıcısı */
+.news-image-wrapper {
+    width: 100%;
+    height: 450px; /* Detay sayfasında biraz daha heybetli durması için */
+    background: linear-gradient(135deg, #1a1a1a, #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden; /* Resmin köşelerden taşmasını engeller */
+}
+
+/* API/Mock'tan Gelen Resmin Stili */
+.detail-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Resmi yamultmadan alanı tamamen doldurur */
+    object-position: center;
+}

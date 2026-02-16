@@ -8,8 +8,8 @@
  */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home';
-import Detail from './Pages/Detail';
+import Home from './Home/Home';
+import Detail from './Details/Detail';
 import './App.css';
 
 function App() {
