@@ -1,0 +1,251 @@
+/**
+ * PROJE: News-AI-Projesi
+ * DOSYA: Home.css (Ana Sayfa Bileşeni)
+ * ----------------------------------------------------------------------------
+ * 1. HERO VE GİRİŞ: Ana sayfa açılış animasyonlarını ve büyük başlık (H1) yerleşimini yönetir.
+ * 2. GRADYAN EFEKTLERİ: Dinamik renk geçişli başlık metni ve istatistik sayıları animasyonlarını kontrol eder.
+ * 3. İSTATİSTİK PANELİ: Dashboard tarzı veri kutularının ızgara (grid) yapısını ve görsel stilini düzenler.
+ * 4. ÖNE ÇIKAN HABER: Sayfanın en üstündeki büyük ana haber kartının özel yerleşim ve hover efektlerini kurar.
+ * 5. DUYARLI TASARIM & TEMA: Tablet ve mobil ekranlar için yerleşim uyumunu ve aydınlık mod renk geçişlerini sağlar.
+ */
+.hero {
+    padding: 3rem 0 2rem;
+    animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    text-align: center;
+}
+.stat-number {
+    font-family: 'Space Mono', monospace !important;
+    font-size: 2.2rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -1px !important;
+    background: linear-gradient(135deg, #00d4ff, #9d4edd) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    margin-bottom: 5px !important;
+}
+.stat-label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.8rem !important;
+    color: var(--text-secondary) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    opacity: 0.8 !important;
+}
+
+/* Featured News */
+.featured-main-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; 
+    object-position: center !important;
+    border-radius: 20px;
+}
+.featured-card:hover .featured-main-img {
+    transform: scale(1.03);
+    transition: transform 0.4s ease;
+}
+.featured-section {
+    padding: 2rem 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+.view-all {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+.view-all:hover {
+    gap: 1rem;
+}
+.featured-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+}
+.featured-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15);
+    border-color: var(--accent-blue);
+}
+.featured-image-wrapper {
+    width: 100% !important;
+    min-height: 100% !important; 
+    background: #111111 !important;
+    border-radius: 20px 0 0 20px !important; 
+    margin: 0 !important; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+.featured-content {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.featured-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.featured-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+.featured-card p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-height: 5.5em;
+    word-break: break-word;
+}
+.home-page {
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.home-page[data-theme="light"] .hero-grid .hero-stats {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    opacity: 1 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; 
+    justify-items: center !important;                
+    align-items: center !important;                
+    text-align: center !important;
+}
+.home-page[data-theme="light"] .stat-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.home-page[data-theme="light"] .hero-stats .stat-label {
+    color: #666666 !important;
+}
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-card {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.25rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+}
+[data-theme="light"] .featured-card,
+[data-theme="light"] .featured-content {
+    background-color: #ffffff !important;
+}
+
+[data-theme="light"] .featured-content h2,
+[data-theme="light"] .featured-content p {
+    color: #1a1a1a !important;
+}
+
+

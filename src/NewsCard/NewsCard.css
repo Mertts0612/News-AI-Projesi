@@ -1,0 +1,214 @@
+/**
+ * PROJE: News-AI-Projesi
+ * DOSYA: NewsCard.css (Haber Kartları Bileşeni)
+ * ----------------------------------------------------------------------------
+ * 1. IZGARA SİSTEMİ: Haber kartlarının sayfadaki dizilimini (min 350px) ve aralarındaki boşlukları yönetir.
+ * 2. KART MİMARİSİ: Kartların temel iskeletini, kavisli köşelerini ve taşmaları (overflow) kontrol eder.
+ * 3. ETKİLEŞİMLİ EFEKTLER: Hover durumunda kartın yükselmesi, parlama (glow) efekti ve gölge değişimini sağlar.
+ * 4. TİPOGRAFİ VE SINIRLANDIRMA: Başlık fontlarını ve metinlerin 3 satırda otomatik kesilmesini (line-clamp) düzenler.
+ * 5. FAVORİ VE ÖNEM: Favori butonu ve önem yüzdesi göstergelerinin stilini yönetir.
+ */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+.news-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.news-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.news-card:hover::before {
+    opacity: 1;
+}
+
+.news-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-blue);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-blue);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.news-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.news-card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Footer yeni yapı */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+/* Önem yüzdesi badge */
+.importance-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.7rem;
+    border: 1.5px solid;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+}
+
+.importance-icon {
+    font-size: 0.9rem;
+}
+
+.news-card:hover .importance-badge {
+    transform: scale(1.05);
+}
+
+/* Stat (okuma süresi) */
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stat-icon {
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+/* Favori butonu - sağ alt */
+.favorite-btn {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.favorite-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-blue);
+    transform: scale(1.1) rotate(10deg);
+}
+
+.favorite-btn.favorited {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--accent-blue);
+}
+
+.favorite-btn.favorited:hover {
+    transform: scale(1.15) rotate(-10deg);
+}
+
+.star-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.favorite-btn:active .star-icon {
+    transform: scale(0.85);
+}
+
+/* Light mode uyumu */
+[data-theme="light"] .news-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .news-card h3,
+[data-theme="light"] .news-card p {
+    color: #1a1a1a !important;
+}
+
+[data-theme="light"] .favorite-btn {
+    background: #f9f9f9;
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .favorite-btn:hover {
+    background: #f0f0f0;
+    border-color: var(--accent-blue);
+}
+
+[data-theme="light"] .favorite-btn.favorited {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--accent-blue);
+}

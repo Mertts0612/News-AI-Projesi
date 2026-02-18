@@ -1,0 +1,36 @@
+/**
+ * PROJE: News-AI-Projesi
+ * DOSYA: App.css (Ana Uygulama Kapsayıcısı ve Temel Stiller)
+ * ----------------------------------------------------------------------------
+ * 1. EVRENSEL SIFIRLAMA: Proje genelindeki tüm elementlerin tarayıcı boşluklarını sıfırlayarak tutarlı bir görünüm sağlar.
+ * 2. TASARIM DEĞİŞKENLERİ (:root): Renk paletini ve temaları tek merkezden yöneterek tüm alt bileşenlere standart sağlar.
+ * 3. ANA GÖVDE (BODY) YAPILANDIRMASI: Arka plan rengini, ana yazı tipini ve temel metin akış kurallarını (line-height) belirler.
+ * 4. KUTU MODELİ STANDARDI: 'box-sizing: border-box' ile tüm elementlerin boyut hesaplamalarını sabitler, taşmaları önler.
+ * 5. GÖRSEL KİMLİK TEMELLERİ: Uygulamanın en dış katmanındaki font (DM Sans) ve renk geçişlerinin temelini oluşturur.
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
+    --bg-card: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent-blue: #00d4ff;
+    --accent-purple: #9d4edd;
+    --accent-green: #00ff88;
+    --accent-red: #ff4d6d;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}

@@ -1,0 +1,381 @@
+/**
+ * PROJE: News-AI-Projesi
+ * DOSYA: Header.css (Gezinti ve Arama Bileşeni)
+ * ----------------------------------------------------------------------------
+ * 1. SABİT NAVBAR: Gezinti çubuğunu sayfa üstüne sabitler (sticky), cam efekti (blur) ve giriş animasyonu ekler.
+ * 2. MARKA KİMLİĞİ: Uzay temalı (Space Mono) logoyu gradyan renklerle ve özel harf boşluklarıyla yapılandırır.
+ * 3. ARAMA MEKANİZMASI: Akıllı arama çubuğunun genişliğini, odaklanma (focus) efektlerini ve sonuç listesini yönetir.
+ * 4. KATEGORİ BUTONLARI (PILLS): Haber kategorilerinin normal, aktif ve hover durumlarındaki görsel geçişlerini kontrol eder.
+ * 5. MOBİL UYUM: Dar ekranlarda arama çubuğunu alta alır ve kategori butonlarını yana kaydırılabilir (scroll) hale getirir.
+ */
+header .logo,
+header .pill,
+header .search-icon,
+header .icon-button {
+    color: #ffffff !important;
+}
+
+header .pill:not(.active) {
+    background: #1a1a1a !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.navbar {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky !important; /* Tekrar yukarı çiviledik */
+    top: 0 !important;
+    background: #000000 !important; /* Hafif transparan siyah */
+    backdrop-filter: blur(20px) !important;
+    z-index: 1000 !important;
+    animation: slideDown 0.6s ease-out;
+}
+
+[data-theme="light"] .navbar {
+    background: rgba(248, 249, 250, 0.95) !important; /* Light modda beyaz transparan */
+}
+.header-section {
+    padding: 1.5rem 0;
+    position: relative !important; /* Sayfayla birlikte yukarı kayar */
+    top: auto !important;
+    background: transparent !important; /* Arka planı şeffaf yaptık */
+    backdrop-filter: none !important;
+    z-index: 10;
+    text-align: center; /* Önceki adımlarda istediğin gibi ortalıyoruz */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+/* Search Bar */
+.search-container {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.search-results {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.search-result-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.search-result-item:hover {
+    background: var(--bg-secondary);
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.search-result-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.icon-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+.icon-button:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.nav-pills {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.pill {
+    padding: 0.5rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.pill:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.pill.active {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+    border-color: transparent;
+}
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap; 
+    }
+
+    .search-container {
+        order: 3; 
+        max-width: 100%;
+        width: 100%;
+    }
+    .nav-pills {
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; 
+    }
+    .nav-pills::-webkit-scrollbar {
+        display: none; 
+    }
+}
+[data-theme="light"] .navbar {
+    background: #000000 !important; /* Siyah kalmaya zorla */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="light"] .pill:not(.active) {
+    background-color: #1a1a1a !important; 
+    color: #ffffff !important;        
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="light"] .search-input {
+    background: #1a1a1a!important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="light"] .icon-button {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="light"] .pill.active {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)) !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+
+/* ===== AUTOCOMPLETE DROPDOWN ===== */
+.autocomplete-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #0d0d0d;
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 212, 255, 0.08);
+    z-index: 9999;
+    overflow: hidden;
+    animation: dropdownSlide 0.18s ease-out;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.autocomplete-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.autocomplete-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.autocomplete-item:last-of-type {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.active {
+    background: rgba(0, 212, 255, 0.08);
+}
+
+.autocomplete-item.active .autocomplete-title {
+    color: var(--accent-blue, #00d4ff);
+}
+
+.autocomplete-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.autocomplete-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.autocomplete-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+}
+
+.autocomplete-category {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 400;
+}
+
+.autocomplete-arrow {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.autocomplete-item:hover .autocomplete-arrow,
+.autocomplete-item.active .autocomplete-arrow {
+    color: var(--accent-blue, #00d4ff);
+    transform: translateX(3px);
+}
+
+/* "Tüm sonuçları gör" satırı */
+.autocomplete-search-all {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    color: var(--accent-blue, #00d4ff);
+    cursor: pointer;
+    border-top: 1px solid rgba(0, 212, 255, 0.12);
+    background: rgba(0, 212, 255, 0.04);
+    font-weight: 500;
+    transition: background 0.15s;
+}
+
+.autocomplete-search-all:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* Light mode uyumu */
+[data-theme="light"] .autocomplete-dropdown {
+    background: #1a1a1a;
+    border-color: rgba(0, 212, 255, 0.3);
+}
