@@ -47,16 +47,14 @@ function Detail() {
 
   return (
     <div className="detail-page">
-      {/* Üst Siyah Bar - Her zaman görünür */}
       <TopBar currencies={currencies} />
 
       <div className="grain-overlay"></div>
       <div className="detail-content-container">
-        <nav className="back-nav" style={{ marginBottom: '3rem', paddingTop: '2rem' }}>
+        <nav className="back-nav">
           <button
             onClick={() => navigate('/')}
-            className="back-link"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#00d4ff', fontWeight: 'bold' }}
+            className="back-link-btn"
           >
             ← GERİ DÖN
           </button>
@@ -73,7 +71,6 @@ function Detail() {
             </div>
           </header>
 
-          {/* Haberin Ana Görseli - Küçültülmüş */}
           <div className="news-image-wrapper">
             {newsItem.imageUrl ? (
               <img
@@ -91,36 +88,27 @@ function Detail() {
           </div>
 
           <div className="content-body">
-            <p className="news-spot" style={{
-              fontSize: '1.5rem', borderLeft: '4px solid #00d4ff',
-              paddingLeft: '1.5rem', marginBottom: '2.5rem', color: '#ffffff', fontWeight: '500'
-            }}>
+            {/* style içindeki sabit renkleri sildik, sadece hizalamayı bıraktık veya CSS'e taşıdık */}
+            <p className="news-spot-text">
               {newsItem.description.split('.')[0]}.
             </p>
-            <div className="description" style={{ fontSize: '1.2rem', lineHeight: '1.8', opacity: '0.9', color: '#a0a0a0' }}>
+            <div className="description-text">
               {newsItem.description}
             </div>
           </div>
 
-          {/* AI Analiz Kutusu */}
-          <div className="ai-note" style={{
-            marginTop: '4rem', padding: '2rem', background: 'rgba(255,255,255,0.03)',
-            borderRadius: '15px', border: '1px solid rgba(255,255,255,0.1)', fontStyle: 'italic'
-          }}>
-            <span style={{ color: '#00d4ff' }}>✨ AI Analizi:</span> Bu içerik yapay zeka tarafından analiz edilmiş ve doğrulanmıştır.
+          {/* Sabit background ve border renklerini sildik */}
+          <div className="info-box-ai">
+            <span className="info-label">✨ AI Analizi:</span> Bu içerik yapay zeka tarafından analiz edilmiş ve doğrulanmıştır.
           </div>
 
-          {/* Kaynak Kutusu */}
-          <div className="ai-note source-note" style={{
-            marginTop: '1.5rem', padding: '2rem', background: 'rgba(255,255,255,0.03)',
-            borderRadius: '15px', border: '1px solid rgba(255,255,255,0.1)', fontStyle: 'normal'
-          }}>
-            <span style={{ color: '#00d4ff' }}>🔗 Kaynak:</span>{' '}
+          <div className="info-box-source">
+            <span className="info-label">🔗 Kaynak:</span>{' '}
             <a
               href={newsItem.sourceUrl || '#'}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#a0cfff', textDecoration: 'underline', wordBreak: 'break-all' }}
+              className="source-link"
             >
               {newsItem.sourceUrl || 'Kaynak linki mevcut değil'}
             </a>
@@ -128,8 +116,8 @@ function Detail() {
         </article>
       </div>
 
-      <footer className="footer-bottom" style={{ marginTop: '5rem', paddingBottom: '2rem', textAlign: 'center' }}>
-        <p>© 2026 AI News • Tufan'ın Web Sitesi</p>
+      <footer className="footer-bottom-section">
+        <p>© 2026 AI News </p>
       </footer>
     </div>
   );

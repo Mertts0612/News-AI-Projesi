@@ -12,16 +12,35 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NewsCard.css';
 
+
 function NewsCard({ item, index }) {
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
   const [timeAgo, setTimeAgo] = useState('');
 
-  // Favori durumunu localStorage'dan yükle
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    setIsFavorited(favorites.includes(item.id));
-  }, [item.id]);
+    const checkFavorite = () => {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const isStillFavorite = favorites.includes(item.id);
+
+      // Eğer zaten favori değilse ve hala değilse bir şey yapma
+      if (isFavorited === isStillFavorite) return;
+
+      // ANİMASYONLU GEÇİŞ:
+      // Burada state'i aniden değiştirmek yerine CSS sınıflarının 
+      // geçiş yapmasına izin verecek şekilde güncelliyoruz
+      setIsFavorited(isStillFavorite);
+    };
+
+    checkFavorite();
+    window.addEventListener('favoritesUpdated', checkFavorite);
+    window.addEventListener('storage', checkFavorite);
+
+    return () => {
+      window.removeEventListener('favoritesUpdated', checkFavorite);
+      window.removeEventListener('storage', checkFavorite);
+    };
+  }, [item.id, isFavorited]); // isFavorited'ı buraya ekledik ki değişimleri takip etsin
 
   // "X saat önce" hesaplama
   useEffect(() => {
@@ -56,21 +75,28 @@ function NewsCard({ item, index }) {
     return () => clearInterval(interval);
   }, [item.publishedAt, item.date]);
 
-  // Favori toggle
   const toggleFavorite = (e) => {
-    e.stopPropagation(); // Kartın tıklanma olayını engelle
+    e.stopPropagation(); 
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     
+    // 1. Durumu belirle
+    const isAdding = !isFavorited; 
+
     if (isFavorited) {
-      const updated = favorites.filter(id => id !== item.id);
-      localStorage.setItem('favorites', JSON.stringify(updated));
-      setIsFavorited(false);
+        // Çıkartma
+        const updated = favorites.filter(id => id !== item.id);
+        localStorage.setItem('favorites', JSON.stringify(updated));
+        setIsFavorited(false);
     } else {
-      favorites.push(item.id);
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-      setIsFavorited(true);
+        // Ekleme
+        favorites.push(item.id);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        setIsFavorited(true);
     }
-  };
+
+    // 2. KRİTİK SATIR: Bu satır Header'ı dürter ve "Veri değişti, oku!" der.
+    window.dispatchEvent(new Event('favoritesUpdated'));
+};
 
   // Önem yüzdesine göre renk
   const getImportanceColor = (importance) => {
@@ -130,5 +156,4 @@ function NewsCard({ item, index }) {
     </article>
   );
 }
-
 export default NewsCard;

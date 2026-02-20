@@ -17,13 +17,12 @@ import './Home.css';
 
 const categories = ["Tümü", "Teknoloji", "Siyaset", "Gündem", "Spor", "Ekonomi", "Eğitim"];
 
-function Home() {
+function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
     const navigate = useNavigate();
     const mainSectionRef = useRef(null);
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState("Tümü");
-    const [theme, setTheme] = useState("dark");
     const [searchTerm, setSearchTerm] = useState("");
     const [currencies, setCurrencies] = useState({
         usd: { value: 33.45, change: 0.12 },
@@ -33,17 +32,24 @@ function Home() {
         gold: { value: 3621, change: 0.83 }
     });
 
-    // 2. Veri Çekme (Axios) - sadece ilk yüklemede çalışır
     useEffect(() => {
         const fetchNews = async () => {
             try {
                 setLoading(true);
+                // Gerçek API'ye geçtiğinde burayı değiştireceksin
                 const response = await axios.get('/src/Data/newsData.json');
-                setNews(response.data.news);
-                setTimeout(() => setLoading(false), 800);
+                
+                if (response.data && response.data.news) {
+                    setNews(response.data.news);
+                }
             } catch (error) {
                 console.error("Haberler yüklenirken hata oluştu:", error);
-                setLoading(false);
+                // Hata durumunda kullanıcıya boş liste göster veya uyarı ver
+                setNews([]); 
+            } finally {
+                // setTimeout sunum için kalabilir, ama finally içinde olması 
+                // her durumda loading'in kapanmasını garanti eder.
+                setTimeout(() => setLoading(false), 800);
             }
         };
         fetchNews();
@@ -57,7 +63,14 @@ function Home() {
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
     }, [activeCategory]); // activeCategory her değiştiğinde bu blok tekrar çalışır
-
+    useEffect(() => {
+        // Sayfa yenilendiğinde tarayıcının eski scroll konumunu unutmasını sağlar
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
+        // Her sayfa açılışında en tepeye (TopBar'a) çıkar
+        window.scrollTo(0, 0);
+    }, []);
 
     // 2. Senin meşhur CANLI KUR güncelleme motorun
     useEffect(() => {
@@ -88,10 +101,6 @@ function Home() {
         return () => clearInterval(interval);
     }, []);
 
-    // 3. Tema Değiştirme Efekti
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-    }, [theme]);
 
     // 4. Filtreleme ve Öne Çıkan Haber Mantığı
     const filteredNews = news.filter(item => {
@@ -117,7 +126,7 @@ function Home() {
                 activeCategory={activeCategory}
                 setActiveCategory={setActiveCategory}
                 theme={theme}
-                toggleTheme={() => setTheme(prev => prev === "dark" ? "light" : "dark")}
+                toggleTheme={toggleTheme}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 onSearchNavigate={(term) => navigate(`/arama?q=${encodeURIComponent(term)}`)}

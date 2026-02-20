@@ -23,6 +23,34 @@ function Header({
     allNews = []
 }) {
     const navigate = useNavigate();
+    // 1. Favori ID'lerini tutacak state
+    const [favoriteIds, setFavoriteIds] = useState([]);
+
+    // 2. localStorage'dan veriyi çekip state'e yazan fonksiyon
+    useEffect(() => {
+        const syncFavorites = () => {
+            const saved = JSON.parse(localStorage.getItem('favorites') || '[]');
+            setFavoriteIds(saved);
+        };
+
+        syncFavorites(); // Sayfa açıldığında çalıştır
+
+        // NewsCard'dan gelen sinyali ve diğer sekmelerdeki değişimi dinle
+        window.addEventListener('favoritesUpdated', syncFavorites);
+        window.addEventListener('storage', syncFavorites);
+
+        return () => {
+            window.removeEventListener('favoritesUpdated', syncFavorites);
+            window.removeEventListener('storage', syncFavorites);
+        };
+    }, []);
+
+    // 3. Ekranda gösterilecek haberleri hesapla (Her render'da güncel kalır)
+    const favoriteNews = allNews.filter(item =>
+        favoriteIds.map(String).includes(String(item.id))
+    );
+
+    const [showFavorites, setShowFavorites] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [activeSuggestion, setActiveSuggestion] = useState(-1);
@@ -31,9 +59,12 @@ function Header({
     // Dışarı tıklanınca kapat
     useEffect(() => {
         function handleClickOutside(e) {
+            // Eğer tıkladığımız yer wrapperRef (arama ve favori alanı) dışındaysa
             if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
                 setShowSuggestions(false);
                 setActiveSuggestion(-1);
+                setShowFavorites(false); // İŞTE BU SATIR FAVORİLERİ KAPATIR
+                setShowCatFilter(false);
             }
         }
         document.addEventListener('mousedown', handleClickOutside);
@@ -173,10 +204,94 @@ function Header({
                         <button className="icon-button" onClick={toggleTheme} title="Tema Değiştir">
                             {theme === 'dark' ? '☀️' : '🌙'}
                         </button>
-                        <button className="icon-button" title="Favoriler">⭐</button>
+                        <div className="favorites-wrapper" ref={wrapperRef}>
+                            <button
+                                className={`icon-button ${favoriteIds.length > 0 ? 'has-favorites' : ''}`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowFavorites(!showFavorites);
+                                }}
+                                title="Favoriler"
+                            >
+                                ⭐
+                                {favoriteIds.length > 0 && (
+                                    <span key={favoriteIds.length} className="fav-count fav-count-animate">
+                                        {favoriteIds.length}
+                                    </span>
+                                )}
+                            </button>
+
+                            {/* BURASI KRİTİK: {showFavorites && ( ... )} yapısını sildik.
+            Yerine direkt div'i koyduk ve active sınıfıyla kontrol ediyoruz.
+        */}
+                            <div className={`fav-dropdown ${showFavorites ? 'active' : ''}`}>
+                                <div className="fav-header">
+                                    <span>Favorilerim</span>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        
+
+                                        {favoriteNews.length > 0 && (
+                                            // Header.jsx içindeki Temizle butonu
+                                            <button
+                                                className="clear-all-btn"
+                                                onClick={() => {
+                                                    if (window.confirm("Tüm favorileri silmek istediğine emin misin?")) {
+                                                        localStorage.setItem('favorites', JSON.stringify([]));
+                                                        setFavoriteIds([]);
+                                                        window.dispatchEvent(new Event('favoritesUpdated'));
+                                                    }
+                                                }}
+                                            >
+                                                Temizle
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="fav-list" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                                    {favoriteNews.length > 0 ? (
+                                        favoriteNews.map(news => (
+                                            <div
+                                                key={news.id}
+                                                className="fav-item"
+                                                style={{ cursor: 'pointer', position: 'relative' }}
+                                                onClick={() => {
+                                                    setShowFavorites(false);
+                                                    navigate(`/haber/${news.id}`);
+                                                }}
+                                            >
+                                                <img src={news.imageUrl} alt="" className="fav-thumb" />
+                                                <div className="fav-info">
+                                                    <span className="fav-title">{news.title}</span>
+                                                    <span className="fav-category">#{news.category}</span>
+                                                </div>
+
+                                                {/* Favori panelindeki tekil silme butonu (X) */}
+                                                <button
+                                                    className="remove-fav-btn"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        const saved = JSON.parse(localStorage.getItem('favorites') || '[]');
+                                                        const updated = saved.filter(id => String(id) !== String(news.id));
+                                                        localStorage.setItem('favorites', JSON.stringify(updated));
+                                                        window.dispatchEvent(new Event('favoritesUpdated'));
+                                                    }}
+                                                >
+                                                    ✕
+                                                </button>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="fav-empty">
+                                            <div style={{ fontSize: '2rem', marginBottom: '10px' }}>⭐</div>
+                                            <p>Henüz bir haber favorilemedin.</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 {/* Kategori Pills */}
                 <nav className="nav-pills" style={{ marginTop: '1.5rem' }}>
                     {categories.map(cat => (
@@ -189,7 +304,7 @@ function Header({
                         </button>
                     ))}
                 </nav>
-            </div>
+            </div> {/* container bitti */}
         </header>
     );
 }
