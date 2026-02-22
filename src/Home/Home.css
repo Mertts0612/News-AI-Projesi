@@ -1,12 +1,9 @@
 /**
- * PROJE: News-AI-Projesi
- * DOSYA: Home.css (Ana Sayfa Bileşeni)
- * ----------------------------------------------------------------------------
- * 1. HERO VE GİRİŞ: Ana sayfa açılış animasyonlarını ve büyük başlık (H1) yerleşimini yönetir.
- * 2. GRADYAN EFEKTLERİ: Dinamik renk geçişli başlık metni ve istatistik sayıları animasyonlarını kontrol eder.
- * 3. İSTATİSTİK PANELİ: Dashboard tarzı veri kutularının ızgara (grid) yapısını ve görsel stilini düzenler.
- * 4. ÖNE ÇIKAN HABER: Sayfanın en üstündeki büyük ana haber kartının özel yerleşim ve hover efektlerini kurar.
- * 5. DUYARLI TASARIM & TEMA: Tablet ve mobil ekranlar için yerleşim uyumunu ve aydınlık mod renk geçişlerini sağlar.
+ * 1. Hero bölümü, fadeIn animasyonu ve başlık stilleri.
+ * 2. gradient-text ve istatistik kartları grid yapısı.
+ * 3. Öne çıkan haber kartı (featured) ve hover efektleri.
+ * 4. news-grid ve main-section yerleşimi; responsive medya sorguları.
+ * 5. Light theme renk geçişleri ve tema uyumlu stiller.
  */
 .hero {
     padding: 3rem 0 2rem;

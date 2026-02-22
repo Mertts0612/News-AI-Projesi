@@ -1,0 +1,282 @@
+/* Sayfa – tema duyarlı */
+.weather-page {
+  min-height: 100vh;
+  background: var(--bg-primary, #0a0a0c);
+  position: relative;
+}
+
+.weather-page[data-theme="light"] {
+  background: #f0f2f5;
+}
+
+/* Ana panel – genişlik artırıldı, büyük ekranda dengeli */
+.weather-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .weather-content {
+    max-width: 800px;
+    padding: 2.5rem 2rem;
+  }
+}
+
+/* Geri Dön – panel ile uyumlu boyut, çerçevesiz */
+.weather-content .back-nav {
+  margin-bottom: 2rem;
+  padding-top: 0.5rem;
+  z-index: 5;
+}
+
+.weather-content .back-link-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--accent-blue);
+  transition: color 0.2s ease;
+}
+
+.weather-content .back-link-btn:hover {
+  color: var(--accent-purple);
+}
+
+.weather-page[data-theme="light"] .weather-content .back-link-btn {
+  color: #0099c7;
+}
+
+.weather-page[data-theme="light"] .weather-content .back-link-btn:hover {
+  color: #7b2cbf;
+}
+
+.weather-loading,
+.weather-error {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-page[data-theme="light"] .weather-loading,
+.weather-page[data-theme="light"] .weather-error {
+  color: #555;
+}
+
+.weather-error p {
+  color: #ff6b6b;
+}
+
+.weather-page[data-theme="light"] .weather-error p {
+  color: #c92a2a;
+}
+
+/* Ana kart – tema duyarlı arka plan ve metin */
+.weather-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 2.5rem;
+}
+
+.weather-page[data-theme="light"] .weather-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.weather-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.weather-icon-lg {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.weather-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.25rem 0;
+}
+
+.weather-page[data-theme="light"] .weather-title {
+  color: #1a1a1a;
+}
+
+.weather-durum {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.weather-page[data-theme="light"] .weather-durum {
+  color: #555;
+}
+
+.weather-now {
+  text-align: center;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.weather-page[data-theme="light"] .weather-now {
+  border-top-color: rgba(0, 0, 0, 0.1);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Ortadaki sıcaklık – proje vurgu rengi (mavi-mor) */
+.weather-degree-now {
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-family: 'Space Mono', monospace;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  line-height: 1.2;
+}
+
+.weather-page[data-theme="light"] .weather-degree-now {
+  background: linear-gradient(135deg, #0099c7, #7b2cbf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.weather-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.weather-page[data-theme="light"] .weather-label {
+  color: #666;
+}
+
+.weather-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem 0;
+}
+
+.weather-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.weather-meta-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.weather-page[data-theme="light"] .weather-meta-label {
+  color: #666;
+}
+
+.weather-meta-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.weather-page[data-theme="light"] .weather-meta-value {
+  color: #1a1a1a;
+}
+
+/* 3 günlük tahmin – panel genişliğine yayılan kartlar */
+.weather-forecast {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.weather-page[data-theme="light"] .weather-forecast {
+  border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+.weather-forecast-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 1rem 0;
+}
+
+.weather-page[data-theme="light"] .weather-forecast-title {
+  color: #555;
+}
+
+.weather-forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+/* 3 günlük tahmin – haber kartı stiline yakın: ince mavi-mor border, siyah temada belirgin arka plan */
+.weather-forecast-day {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  min-width: 0;
+  background-clip: padding-box;
+  position: relative;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.weather-forecast-day::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.weather-page[data-theme="light"] .weather-forecast-day {
+  background: #f8f9fc;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.weather-page[data-theme="light"] .weather-forecast-day::before {
+  background: linear-gradient(135deg, #0082a8, #6a1b9a);
+}
+
+.forecast-day-name {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.weather-page[data-theme="light"] .forecast-day-name {
+  color: #555;
+}
+
+.forecast-day-degree {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.weather-page[data-theme="light"] .forecast-day-degree {
+  color: #1a1a1a;
+}

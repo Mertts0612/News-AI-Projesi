@@ -14,7 +14,7 @@
  header .icon-button {
      color: #ffffff !important;
  }
- 
+
  header .pill:not(.active) {
      background: #1a1a1a !important;
      border-color: rgba(255, 255, 255, 0.1) !important;
@@ -155,12 +155,46 @@
  }
  
  /* Header Actions */
- .header-actions {
-     display: flex;
-     gap: 1rem;
-     align-items: center;
- }
- .icon-button {
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Navbar hava durumu özeti (ikon + derece) – hap görünümü, tema duyarlı */
+.header-weather-widget {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.75rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    color: #fff;
+}
+
+.header-weather-widget:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.header-weather-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+    color: inherit;
+}
+
+.header-weather-degree {
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    color: inherit;
+}
+
+.icon-button {
      width: 40px;
      height: 40px;
      display: flex;
@@ -173,60 +207,367 @@
      transition: all 0.3s ease;
      color: var(--text-primary);
  }
- .icon-button:hover {
-     background: var(--bg-secondary);
-     border-color: var(--accent-blue);
-     transform: translateY(-2px);
- }
- 
- .nav-pills {
-     display: flex;
-     gap: 0.5rem;
- }
- 
- .pill {
-     padding: 0.5rem 1.25rem;
-     background: var(--bg-card);
-     border: 1px solid var(--border);
-     border-radius: 50px;
-     color: var(--text-secondary);
-     font-size: 0.9rem;
-     cursor: pointer;
-     transition: all 0.3s ease;
-     font-weight: 500;
- }
- 
- .pill:hover {
-     background: var(--bg-secondary);
-     color: var(--text-primary);
-     border-color: var(--accent-blue);
-     transform: translateY(-2px);
- }
- 
- .pill.active {
-     background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-     color: white;
-     border-color: transparent;
- }
- @media (max-width: 768px) {
-     .header-content {
-         flex-wrap: wrap; 
-     }
- 
-     .search-container {
-         order: 3; 
-         max-width: 100%;
-         width: 100%;
-     }
-     .nav-pills {
-         overflow-x: auto; 
-         -webkit-overflow-scrolling: touch;
-         scrollbar-width: none; 
-     }
-     .nav-pills::-webkit-scrollbar {
-         display: none; 
-     }
- }
+.icon-button:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+/* ===== Soldan açılan kategori sidebar ===== */
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.category-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    max-width: 85vw;
+    min-width: 240px;
+    height: 100vh;
+    background: rgba(10, 10, 12, 0.98);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1999;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+    overflow-y: auto;
+}
+
+.category-sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sidebar-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.sidebar-close:hover {
+    background: rgba(255, 77, 77, 0.15);
+    border-color: rgba(255, 77, 77, 0.3);
+    color: #ff4d4d;
+}
+
+/* Sidebar: Kategoriler listesi en üstte */
+.sidebar-nav {
+    flex: 0 0 auto;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Sidebar: Son Depremler - kategorilerin altında, kompakt */
+.sidebar-earthquakes {
+    padding: 0.6rem 0.75rem 1rem;
+    min-width: 0;
+}
+
+.sidebar-earthquakes-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 0.45rem 0;
+}
+
+.sidebar-earthquakes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-earthquake-item {
+    padding: 0.35rem 0.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    margin-bottom: 0.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-earthquake-item:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-earthquake-item.empty {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    padding: 0.4rem 0.5rem;
+}
+
+/* Yer + büyüklük aynı satır */
+.sidebar-earthquake-item .eq-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.sidebar-earthquake-item .eq-yer {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-earthquake-item .eq-mag {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    flex-shrink: 0;
+}
+
+.sidebar-earthquake-item .eq-sub {
+    display: block;
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.15rem;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.2);
+    color: #fff;
+}
+
+.sidebar-item.active {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+    border-color: rgba(0, 212, 255, 0.25);
+    color: #fff;
+}
+
+.sidebar-item-icon {
+    font-size: 1.1rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+.sidebar-item-text {
+    flex: 1;
+}
+
+.sidebar-item-check {
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+/* Hamburger – kategori menüsünü açar */
+.sidebar-toggle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 0.75rem;
+}
+
+.sidebar-toggle:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 18px;
+}
+
+.hamburger-icon span {
+    display: block;
+    height: 2px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 2px;
+}
+
+/* Beyaz temada menü ikonu siyah temayla aynı kalsın */
+[data-theme="light"] .sidebar-toggle {
+    background: #1a1a1a !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="light"] .sidebar-toggle:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--accent-blue) !important;
+}
+
+/* Seçili kategori çubuğu */
+.active-category-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.active-category-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+}
+
+.active-category-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(168, 85, 247, 0.12));
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.active-category-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(168, 85, 247, 0.2));
+    border-color: rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.dropdown-arrow {
+    font-size: 0.6rem;
+    opacity: 0.7;
+    transition: transform 0.2s;
+}
+
+.active-category-btn:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.pill {
+    padding: 0.5rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.pill:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.pill.active {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+    border-color: transparent;
+}
+@media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap; 
+    }
+
+    .search-container {
+        order: 3; 
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .category-sidebar {
+        width: 260px;
+        max-width: 88vw;
+    }
+
+    .nav-pills {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-top: 1rem;
+    }
+
+    .nav-pills::-webkit-scrollbar {
+        display: none;
+    }
+}
  [data-theme="light"] .navbar {
      background: #000000 !important; /* Siyah kalmaya zorla */
      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -439,6 +780,41 @@
 .fav-dropdown.active .fav-item:nth-child(4) { animation-delay: 0.25s; }
 .fav-dropdown.active .fav-item:nth-child(5) { animation-delay: 0.3s; }
 
+/* Boş favori durumu – okunaklı metin, panele uygun ikon */
+.fav-empty {
+    text-align: center;
+    padding: 1.5rem 0.75rem;
+}
+
+.fav-empty-icon {
+    margin-bottom: 0.75rem;
+    color: rgba(168, 85, 247, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fav-empty-icon svg {
+    display: block;
+}
+
+.fav-empty p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+/* Beyaz temada favori paneli boş durumu – metin daha net */
+[data-theme="light"] .fav-empty p {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .fav-empty-icon {
+    color: rgba(168, 85, 247, 0.85);
+}
+
 
 
 .fav-header {
@@ -473,7 +849,7 @@
 }
 .fav-item:hover {
     background: rgba(255, 255, 255, 0.08);
-    transform: translateX(-5px); /* Hafifçe sola kaysın */
+    transform: translateX(-5px); 
 }
 
 /* Başlık Metni */

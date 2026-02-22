@@ -8,10 +8,11 @@
  */
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Header from '../Header/Header';
 import TopBar from '../TopBar/TopBar';
 import NewsCard from '../NewsCard/NewsCard';
+import { useCurrencies } from '../hooks/useCurrencies';
+import { getNewsData } from '../services/newsDataApi';
 import './SearchResults.css';
 
 const categories = ["Tümü", "Teknoloji", "Siyaset", "Gündem", "Spor", "Ekonomi", "Sağlık", "Eğitim"];
@@ -29,33 +30,27 @@ function SearchResults() {
     const [theme, setTheme] = useState(() => {
         return document.documentElement.getAttribute('data-theme') || 'dark';
     });
-    const [currencies] = useState({
-        usd: { value: 33.45, change: 0.12 },
-        eur: { value: 36.78, change: -0.08 },
-        btc: { value: 98450, change: 2.34 },
-        bist: { value: 9842, change: 0.47 },
-        gold: { value: 3621, change: 0.83 }
-    });
+    const { currencies } = useCurrencies({ refreshInterval: 5000 });
 
     // Tema yönetimi
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
 
-    // Haberleri yükle
+    // Haberleri newsData üzerinden yükle
     useEffect(() => {
-        const fetchNews = async () => {
+        const loadData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('/src/Data/newsData.json');
-                setAllNews(response.data.news);
-                setTimeout(() => setLoading(false), 500);
+                const { news: newsList } = await getNewsData();
+                setAllNews(Array.isArray(newsList) ? newsList : []);
             } catch (error) {
-                console.error('Haber yüklenirken hata:', error);
-                setLoading(false);
+                console.error('Veri yüklenirken hata:', error);
+            } finally {
+                setTimeout(() => setLoading(false), 500);
             }
         };
-        fetchNews();
+        loadData();
     }, []);
 
     // Arama filtresi — query veya allNews değiştiğinde çalışır

@@ -1,12 +1,9 @@
 /**
- * HABER KARTLARI (BİLEŞEN) YAPISI
- * -------------------------------------------------------------------------
- * 1. TEKRAR KULLANILABİLİRLİK: Tek bir şablon üzerinden tüm haber listesini kutucuklar halinde oluşturur.
- * 2. PROPS YÖNETİMİ: 'item' objesi üzerinden gelen başlık, kategori ve istatistik gibi verileri ekrana yansıtır.
- * 3. NAVİGASYON: Tıklandığında haberin ID'sini kullanarak kullanıcıyı doğru detay sayfasına yönlendirir.
- * 4. GÖRSEL EFEKT: 'animationDelay' kullanarak kartların ekrana sırayla ve akıcı bir şekilde gelmesini sağlar.
- * 5. FAVORİLEME: Yıldız butonu ile haberleri favorilere ekleme/çıkarma.
- * 6. ZAMAN GÖSTERİMİ: "X saat önce" formatında dinamik tarih gösterimi.
+ * 1. item prop ile başlık, kategori, açıklama, importance, readTime gösterilir.
+ * 2. Tıklanınca /haber/:id sayfasına navigate; animationDelay ile sıralı görünüm.
+ * 3. Favori: localStorage ve favoritesUpdated event; yıldız butonu toggle.
+ * 4. timeAgo: publishedAt/date ile "X saat önce" hesaplanır; dakikada bir güncellenir.
+ * 5. getImportanceColor ile önem yüzdesi rengi; favorited state Header ile senkron.
  */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,15 +17,15 @@ function NewsCard({ item, index }) {
 
   useEffect(() => {
     const checkFavorite = () => {
+      // Eğer zaten favori değilse ve hala değilse bir şey yapma
       const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       const isStillFavorite = favorites.includes(item.id);
-
-      // Eğer zaten favori değilse ve hala değilse bir şey yapma
-      if (isFavorited === isStillFavorite) return;
-
       // ANİMASYONLU GEÇİŞ:
       // Burada state'i aniden değiştirmek yerine CSS sınıflarının 
       // geçiş yapmasına izin verecek şekilde güncelliyoruz
+
+      if (isFavorited === isStillFavorite) return;
+
       setIsFavorited(isStillFavorite);
     };
 
@@ -40,9 +37,9 @@ function NewsCard({ item, index }) {
       window.removeEventListener('favoritesUpdated', checkFavorite);
       window.removeEventListener('storage', checkFavorite);
     };
-  }, [item.id, isFavorited]); // isFavorited'ı buraya ekledik ki değişimleri takip etsin
-
+  }, [item.id, isFavorited]);
   // "X saat önce" hesaplama
+
   useEffect(() => {
     const calculateTimeAgo = () => {
       if (!item.publishedAt) {
@@ -71,39 +68,39 @@ function NewsCard({ item, index }) {
     };
 
     calculateTimeAgo();
-    const interval = setInterval(calculateTimeAgo, 60000); // Her dakika güncelle
+    const interval = setInterval(calculateTimeAgo, 60000);
     return () => clearInterval(interval);
   }, [item.publishedAt, item.date]);
 
-  const toggleFavorite = (e) => {
-    e.stopPropagation(); 
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     
     // 1. Durumu belirle
     const isAdding = !isFavorited; 
+        // Çıkartma
+  const toggleFavorite = (e) => {
+    e.stopPropagation(); 
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
     if (isFavorited) {
-        // Çıkartma
         const updated = favorites.filter(id => id !== item.id);
+        // Ekleme
         localStorage.setItem('favorites', JSON.stringify(updated));
         setIsFavorited(false);
     } else {
-        // Ekleme
         favorites.push(item.id);
         localStorage.setItem('favorites', JSON.stringify(favorites));
+    // 2. KRİTİK SATIR: Bu satır Header'ı dürter ve "Veri değişti, oku!" der.
         setIsFavorited(true);
     }
+  // Önem yüzdesine göre renk
 
-    // 2. KRİTİK SATIR: Bu satır Header'ı dürter ve "Veri değişti, oku!" der.
     window.dispatchEvent(new Event('favoritesUpdated'));
 };
 
-  // Önem yüzdesine göre renk
   const getImportanceColor = (importance) => {
-    if (importance >= 90) return '#00d4ff'; // Çok önemli - mavi
-    if (importance >= 80) return '#9d4edd'; // Önemli - mor
-    if (importance >= 70) return '#10b981'; // Orta - yeşil
-    return '#6b7280'; // Düşük - gri
+    if (importance >= 90) return '#00d4ff';
+    if (importance >= 80) return '#9d4edd';
+    if (importance >= 70) return '#10b981';
+    return '#6b7280';
   };
 
   return (
@@ -120,10 +117,10 @@ function NewsCard({ item, index }) {
       <h3>{item.title}</h3>
       
       <p>{item.description}</p>
+          {/* Önem yüzdesi */}
       
       <div className="card-footer">
         <div className="card-meta-left">
-          {/* Önem yüzdesi */}
           {item.importance && (
             <span 
               className="importance-badge"
@@ -136,15 +133,14 @@ function NewsCard({ item, index }) {
               %{item.importance}
             </span>
           )}
-          
-          {/* Okuma süresi */}
+
           <span className="stat">
             <span className="stat-icon">⏱️</span>
             {item.readTime}
+        {/* Favori butonu - sağ alt */}
           </span>
         </div>
 
-        {/* Favori butonu - sağ alt */}
         <button
           className={`favorite-btn ${isFavorited ? 'favorited' : ''}`}
           onClick={toggleFavorite}

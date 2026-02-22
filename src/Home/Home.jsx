@@ -9,10 +9,11 @@
  */
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import TopBar from "../TopBar/TopBar";
 import Header from "../Header/Header";
 import NewsCard from "../NewsCard/NewsCard";
+import { useCurrencies } from '../hooks/useCurrencies';
+import { getNewsData } from '../services/newsDataApi';
 import './Home.css';
 
 const categories = ["Tümü", "Teknoloji", "Siyaset", "Gündem", "Spor", "Ekonomi", "Eğitim"];
@@ -24,35 +25,22 @@ function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState("Tümü");
     const [searchTerm, setSearchTerm] = useState("");
-    const [currencies, setCurrencies] = useState({
-        usd: { value: 33.45, change: 0.12 },
-        eur: { value: 36.78, change: -0.08 },
-        btc: { value: 98450, change: 2.34 },
-        bist: { value: 9842, change: 0.47 },
-        gold: { value: 3621, change: 0.83 }
-    });
+    const { currencies } = useCurrencies({ refreshInterval: 5000 });
 
     useEffect(() => {
-        const fetchNews = async () => {
+        const loadData = async () => {
             try {
                 setLoading(true);
-                // Gerçek API'ye geçtiğinde burayı değiştireceksin
-                const response = await axios.get('/src/Data/newsData.json');
-                
-                if (response.data && response.data.news) {
-                    setNews(response.data.news);
-                }
+                const { news: newsList } = await getNewsData();
+                setNews(Array.isArray(newsList) ? newsList : []);
             } catch (error) {
-                console.error("Haberler yüklenirken hata oluştu:", error);
-                // Hata durumunda kullanıcıya boş liste göster veya uyarı ver
-                setNews([]); 
+                console.error("Veri yüklenirken hata oluştu:", error);
+                setNews([]);
             } finally {
-                // setTimeout sunum için kalabilir, ama finally içinde olması 
-                // her durumda loading'in kapanmasını garanti eder.
                 setTimeout(() => setLoading(false), 800);
             }
         };
-        fetchNews();
+        loadData();
     }, []);
 
     // Kategori değişiminde scroll - her kategori için tetiklenir
@@ -71,36 +59,6 @@ function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
         // Her sayfa açılışında en tepeye (TopBar'a) çıkar
         window.scrollTo(0, 0);
     }, []);
-
-    // 2. Senin meşhur CANLI KUR güncelleme motorun
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrencies(prev => ({
-                usd: {
-                    value: +(prev.usd.value + (Math.random() - 0.5) * 0.1).toFixed(2),
-                    change: +(Math.random() - 0.5).toFixed(2)
-                },
-                eur: {
-                    value: +(prev.eur.value + (Math.random() - 0.5) * 0.1).toFixed(2),
-                    change: +(Math.random() - 0.5).toFixed(2)
-                },
-                btc: {
-                    value: Math.floor(prev.btc.value + (Math.random() - 0.5) * 100),
-                    change: +(Math.random() * 5 - 2.5).toFixed(2)
-                },
-                bist: {
-                    value: Math.floor(prev.bist.value + (Math.random() - 0.5) * 30),
-                    change: +(Math.random() * 2 - 1).toFixed(2)
-                },
-                gold: {
-                    value: Math.floor(prev.gold.value + (Math.random() - 0.5) * 10),
-                    change: +(Math.random() * 1.5 - 0.75).toFixed(2)
-                }
-            }));
-        }, 5000);
-        return () => clearInterval(interval);
-    }, []);
-
 
     // 4. Filtreleme ve Öne Çıkan Haber Mantığı
     const filteredNews = news.filter(item => {

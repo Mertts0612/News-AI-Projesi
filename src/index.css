@@ -25,6 +25,7 @@
     --accent-red: #ff4d6d;
     --accent-yellow: #ffd23f;
     --border: rgba(255, 255, 255, 0.1);
+    --header-logo-filter: none;
 }
 [data-theme="light"] {
     --bg-primary: #f8f9fa;
@@ -33,6 +34,7 @@
     --text-primary: #0a0a0a;
     --text-secondary: #6c757d;
     --border: rgba(0, 0, 0, 0.1);
+    --header-logo-filter: brightness(0) invert(1);
 }
 body {
     font-family: 'DM Sans', sans-serif;

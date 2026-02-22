@@ -1,20 +1,18 @@
 /**
- * CANLI VERİ VE BİLGİ ÇUBUĞU BİLEŞENİ
- * -------------------------------------------------------------------------
- * 1. DİNAMİK VERİ GÖSTERİMİ: Home.jsx'ten gelen anlık döviz ve kripto verilerini görselleştirir.
- * 2. DURUMSAL RENKLENDİRME: Kur değişim oranına göre (artış/azalış) otomatik olarak yeşil veya kırmızı renk atar.
- * 3. CANLI SİNYAL: 'CANLI' ibaresi ve animasyonlu nokta ile sistemin aktif olduğunu kullanıcıya hissettirir.
- * 4. YERELLEŞTİRME: Güncel tarihi Türkiye standartlarında (Gün, Ay, Yıl ve Gün ismi) otomatik olarak formatlar.
- * 5. HİZALAMA: İçeriği 'Space Mono' fontuyla profesyonel bir finans terminali havasında düzenler.
+ * 1. currencies prop ile USD, EUR, BTC, BIST100, ALTIN değer ve değişim yüzdesi.
+ * 2. Artış/azalışa göre yeşil veya kırmızı renk (accent-green, accent-red).
+ * 3. CANLI göstergesi ve animasyonlu nokta; tarih toLocaleDateString tr-TR.
+ * 4. top-bar-content: currency-ticker ve top-bar-right (tarih).
+ * 5. TopBar.css ile stiller; container ile genişlik sınırı.
  */
 import React from 'react';
 import './TopBar.css'; 
 function TopBar({ currencies }) {
   return (
+          {/* Sol Taraf: Döviz ve Kripto Ticker */}
     <div className="top-bar">
       <div className="container">
         <div className="top-bar-content">
-          {/* Sol Taraf: Döviz ve Kripto Ticker */}
           <div className="currency-ticker">
             <div className="currency-item">
               <span className="currency-label">USD/TRY</span>
@@ -64,10 +62,10 @@ function TopBar({ currencies }) {
               <span style={{ fontSize: '0.75rem', color: currencies.gold.change >= 0 ? 'var(--accent-green)' : 'var(--accent-red)' }}>
                 {currencies.gold.change >= 0 ? '↑' : '↓'} {Math.abs(currencies.gold.change)}%
               </span>
+          {/* Sağ Taraf: Canlı Gösterge ve Tarih */}
             </div>
           </div>
 
-          {/* Sağ Taraf: Canlı Gösterge ve Tarih */}
           <div className="top-bar-right">
             <div className="live-indicator">
               <div className="live-dot"></div>

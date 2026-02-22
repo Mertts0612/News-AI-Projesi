@@ -1,12 +1,9 @@
 /**
- * PROJE: News-AI-Projesi
- * DOSYA: NewsCard.css (Haber Kartları Bileşeni)
- * ----------------------------------------------------------------------------
- * 1. IZGARA SİSTEMİ: Haber kartlarının sayfadaki dizilimini (min 350px) ve aralarındaki boşlukları yönetir.
- * 2. KART MİMARİSİ: Kartların temel iskeletini, kavisli köşelerini ve taşmaları (overflow) kontrol eder.
- * 3. ETKİLEŞİMLİ EFEKTLER: Hover durumunda kartın yükselmesi, parlama (glow) efekti ve gölge değişimini sağlar.
- * 4. TİPOGRAFİ VE SINIRLANDIRMA: Başlık fontlarını ve metinlerin 3 satırda otomatik kesilmesini (line-clamp) düzenler.
- * 5. FAVORİ VE ÖNEM: Favori butonu ve önem yüzdesi göstergelerinin stilini yönetir.
+ * 1. news-grid: minmax(350px) ve gap; news-card border ve hover.
+ * 2. card-header, category-tag, date; başlık ve açıklama line-clamp.
+ * 3. card-footer, importance-badge, favorite-btn stilleri.
+ * 4. Hover glow ve transform; accent-blue border vurgusu.
+ * 5. Light theme uyumlu renk ve gölge override.
  */
  .news-grid {
     display: grid;

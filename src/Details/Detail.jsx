@@ -1,36 +1,22 @@
 /**
  * HABER DETAY SAYFASI BİLEŞENİ
  */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import newsData from '../Data/newsData.json';
 import TopBar from '../TopBar/TopBar';
+import { useCurrencies } from '../hooks/useCurrencies';
 import './Detail.css'
 
 function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { currencies } = useCurrencies({ refreshInterval: 5000 });
 
-  const [currencies, setCurrencies] = useState({
-    usd: { value: 33.45, change: 0.12 },
-    eur: { value: 36.78, change: -0.08 },
-    btc: { value: 98450, change: 2.34 },
-    bist: { value: 9842, change: 0.47 },
-    gold: { value: 3621, change: 0.83 }
-  });
-
+  // Detay sayfasına girildiğinde her zaman en üstten başla
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrencies(prev => ({
-        usd:  { value: +(prev.usd.value  + (Math.random() - 0.5) * 0.1).toFixed(2),  change: +((Math.random() - 0.5) * 0.5).toFixed(2) },
-        eur:  { value: +(prev.eur.value  + (Math.random() - 0.5) * 0.1).toFixed(2),  change: +((Math.random() - 0.5) * 0.5).toFixed(2) },
-        btc:  { value: Math.round(prev.btc.value  + (Math.random() - 0.5) * 200),     change: +((Math.random() - 0.5) * 2).toFixed(2) },
-        bist: { value: Math.round(prev.bist.value + (Math.random() - 0.5) * 50),      change: +((Math.random() - 0.5) * 1).toFixed(2) },
-        gold: { value: Math.round(prev.gold.value + (Math.random() - 0.5) * 20),      change: +((Math.random() - 0.5) * 1).toFixed(2) },
-      }));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const newsItem = newsData.news.find(item => item.id === parseInt(id));
 

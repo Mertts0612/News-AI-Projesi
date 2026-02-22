@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './Home/Home';
 import Detail from './Details/Detail';
 import SearchResults from './SearchResults/SearchResults';
+import Weather from './Weather/Weather';
 import './App.css';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         />
         <Route path="/haber/:id" element={<Detail theme={theme} />} />
         <Route path="/arama" element={<SearchResults theme={theme} />} />
+        <Route path="/hava-durumu" element={<Weather />} />
       </Routes>
     </div>
   );

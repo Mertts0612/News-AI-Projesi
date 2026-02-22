@@ -1,4 +1,11 @@
 {
+  "currencies": {
+    "usd": { "value": 33.45, "change": 0.12 },
+    "eur": { "value": 36.78, "change": -0.08 },
+    "btc": { "value": 98450, "change": 2.34 },
+    "bist": { "value": 9842, "change": 0.47 },
+    "gold": { "value": 3621, "change": 0.83 }
+  },
   "news": [
     {
       "id": 1,
@@ -313,5 +320,24 @@
       "importance": 93,
       "sourceUrl": "https://ornek-kaynak.com/haber/24"
     }
-  ]
+  ],
+  "earthquakes": [
+    { "id": 1, "yer": "Akçaova-İzmir", "büyüklük": 4.2, "derinlik": 8.5, "saat": "2026-02-21T08:32:00" },
+    { "id": 2, "yer": "Elazığ", "büyüklük": 3.1, "derinlik": 12.0, "saat": "2026-02-21T06:15:00" },
+    { "id": 3, "yer": "Gölcük-Kocaeli", "büyüklük": 2.8, "derinlik": 5.2, "saat": "2026-02-21T02:44:00" },
+    { "id": 4, "yer": "Malatya", "büyüklük": 3.6, "derinlik": 9.8, "saat": "2026-02-20T22:10:00" },
+    { "id": 5, "yer": "Çanakkale-Ege Denizi", "büyüklük": 4.8, "derinlik": 14.3, "saat": "2026-02-20T18:55:00" },
+    { "id": 6, "yer": "Antakya-Hatay", "büyüklük": 2.5, "derinlik": 6.0, "saat": "2026-02-20T14:20:00" },
+    { "id": 7, "yer": "Düzce", "büyüklük": 3.3, "derinlik": 10.1, "saat": "2026-02-20T09:33:00" }
+  ],
+  "weather": {
+    "anlikDerece": 14,
+    "durum": "Parçalı bulutlu",
+    "nemOrani": 62,
+    "tahmin3Gun": [
+      { "gun": "Cumartesi", "derece": 15 },
+      { "gun": "Pazar", "derece": 12 },
+      { "gun": "Pazartesi", "derece": 11 }
+    ]
+  }
 }
