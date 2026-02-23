@@ -25,10 +25,6 @@ const defaultWeather = {
     { gun: 'Cumartesi', derece: 15 },
     { gun: 'Pazar', derece: 12 },
     { gun: 'Pazartesi', derece: 11 }
-/**
- * newsData.json dosyasını getirir. Tüm veri işlemleri bu fonksiyon üzerinden yapılır.
- * @returns {{ news: Array, currencies: Object, earthquakes: Array, weather: Object }}
- */
   ]
 };
 
@@ -66,33 +62,21 @@ export async function getNewsData() {
       earthquakes: [],
       weather: defaultWeather
     };
-/**
- * Sadece haber listesini getirir (newsData üzerinden).
- */
   }
 }
 
 export async function getNews() {
   const { news } = await getNewsData();
-/**
- * Sadece kur verisini getirir (newsData üzerinden).
- */
   return news;
 }
 
 export async function getCurrencies() {
   const { currencies } = await getNewsData();
-/**
- * Sadece deprem verisini getirir (newsData üzerinden).
- */
   return currencies;
 }
 
 export async function getEarthquakes() {
   const { earthquakes } = await getNewsData();
-/**
- * Sadece hava durumu verisini getirir (newsData üzerinden).
- */
   return earthquakes;
 }
 

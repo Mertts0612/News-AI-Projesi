@@ -9,7 +9,6 @@ import React from 'react';
 import './TopBar.css'; 
 function TopBar({ currencies }) {
   return (
-          {/* Sol Taraf: Döviz ve Kripto Ticker */}
     <div className="top-bar">
       <div className="container">
         <div className="top-bar-content">
@@ -62,7 +61,6 @@ function TopBar({ currencies }) {
               <span style={{ fontSize: '0.75rem', color: currencies.gold.change >= 0 ? 'var(--accent-green)' : 'var(--accent-red)' }}>
                 {currencies.gold.change >= 0 ? '↑' : '↓'} {Math.abs(currencies.gold.change)}%
               </span>
-          {/* Sağ Taraf: Canlı Gösterge ve Tarih */}
             </div>
           </div>
 
