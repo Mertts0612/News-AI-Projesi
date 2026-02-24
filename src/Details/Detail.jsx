@@ -1,24 +1,80 @@
 /**
- * HABER DETAY SAYFASI BİLEŞENİ
+ * 1. useParams ile haber id; getNewsData() ile veri newsDataApi üzerinden alınır.
+ * 2. TopBar ve useCurrencies; geri dön butonu ile ana sayfaya navigasyon.
+ * 3. Loading ve error durumları; haber bulunamazsa "Haber bulunamadı" mesajı.
+ * 4. Detay başlık, spot, görsel, açıklama ve meta paneli.
+ * 5. Sayfa açılışında scroll en üste (useEffect, id bağımlı).
  */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import newsData from '../Data/newsData.json';
+import { getNewsData } from '../services/newsDataApi';
 import TopBar from '../TopBar/TopBar';
 import { useCurrencies } from '../hooks/useCurrencies';
-import './Detail.css'
+import './Detail.css';
 
 function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { currencies } = useCurrencies({ refreshInterval: 5000 });
+  const [newsItem, setNewsItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [imageError, setImageError] = useState(false);
 
-  // Detay sayfasına girildiğinde her zaman en üstten başla
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  const newsItem = newsData.news.find(item => item.id === parseInt(id));
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    setNewsItem(null);
+    setImageError(false);
+
+    getNewsData()
+      .then(({ news }) => {
+        if (cancelled) return;
+        const list = Array.isArray(news) ? news : [];
+        const item = list.find((item) => String(item.id) === String(id));
+        setNewsItem(item ?? null);
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err?.message || 'Veri yüklenemedi');
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => { cancelled = true; };
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="detail-page">
+        <TopBar currencies={currencies} />
+        <div className="grain-overlay" />
+        <div className="container">
+          <div className="loading">
+            <div className="spinner" />
+            <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>Haber yükleniyor...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container" style={{ color: 'white', padding: '5rem', textAlign: 'center' }}>
+        <h2>Veri yüklenirken hata oluştu</h2>
+        <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>{error}</p>
+        <button className="pill active" onClick={() => navigate('/')} style={{ marginTop: '2rem' }}>
+          Ana Sayfaya Dön
+        </button>
+      </div>
+    );
+  }
 
   if (!newsItem) {
     return (
@@ -51,22 +107,19 @@ function Detail() {
             <span className="category-tag">{newsItem.category}</span>
             <h1 className="detail-title gradient-text">{newsItem.title}</h1>
             <div className="meta-panel">
-              <span>📅 {newsItem.date}</span>
-              <span>👁️ {newsItem.views} GÖRÜNTÜLENME</span>
-              <span>⏱️ {newsItem.readTime} OKUMA</span>
+              <span>📅 {newsItem.date ?? '–'}</span>
+              <span>👁️ {newsItem.views ?? '–'} GÖRÜNTÜLENME</span>
+              <span>⏱️ {newsItem.readTime ?? '–'} OKUMA</span>
             </div>
           </header>
 
           <div className="news-image-wrapper">
-            {newsItem.imageUrl ? (
+            {newsItem.imageUrl && !imageError ? (
               <img
                 src={newsItem.imageUrl}
                 alt={newsItem.title}
                 className="detail-main-img"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentNode.innerHTML = '<div class="news-image-placeholder">🤖</div>';
-                }}
+                onError={() => setImageError(true)}
               />
             ) : (
               <div className="news-image-placeholder">🤖</div>
@@ -74,16 +127,16 @@ function Detail() {
           </div>
 
           <div className="content-body">
-            {/* style içindeki sabit renkleri sildik, sadece hizalamayı bıraktık veya CSS'e taşıdık */}
             <p className="news-spot-text">
-              {newsItem.description.split('.')[0]}.
+              {newsItem.description && typeof newsItem.description === 'string'
+                ? newsItem.description.split('.')[0] + '.'
+                : ''}
             </p>
             <div className="description-text">
-              {newsItem.description}
+              {newsItem.description || ''}
             </div>
           </div>
 
-          {/* Sabit background ve border renklerini sildik */}
           <div className="info-box-ai">
             <span className="info-label">✨ AI Analizi:</span> Bu içerik yapay zeka tarafından analiz edilmiş ve doğrulanmıştır.
           </div>

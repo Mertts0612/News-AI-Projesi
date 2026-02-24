@@ -62,10 +62,11 @@ function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
 
     // 4. Filtreleme ve Öne Çıkan Haber Mantığı
     const filteredNews = news.filter(item => {
-        // Önce kategori kontrolü yapıyoruz
         const matchesCategory = activeCategory === "Tümü" || item.category === activeCategory;
-        const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.category.toLowerCase().includes(searchTerm.toLowerCase());
+        const term = (searchTerm || '').toLowerCase();
+        const title = (item.title || '').toLowerCase();
+        const category = (item.category || '').toLowerCase();
+        const matchesSearch = title.includes(term) || category.includes(term);
         return matchesCategory && matchesSearch;
     });
 

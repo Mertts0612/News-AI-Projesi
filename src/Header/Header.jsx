@@ -11,6 +11,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWeather } from '../hooks/useWeather';
 import { useEarthquakes } from '../hooks/useEarthquakes';
+import logoImg from '../assets/logo.png';
 import './Header.css';
 
 function weatherIcon(durum) {
@@ -108,8 +109,8 @@ function Header({
         const q = val.toLowerCase();
         const matched = allNews
             .filter(item =>
-                item.title.toLowerCase().includes(q) ||
-                item.category.toLowerCase().includes(q)
+                (item.title || '').toLowerCase().includes(q) ||
+                (item.category || '').toLowerCase().includes(q)
             )
             .slice(0, 5);
 

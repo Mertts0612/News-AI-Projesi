@@ -61,9 +61,9 @@ function SearchResults() {
         }
         const q = query.toLowerCase();
         const filtered = allNews.filter(item =>
-            item.title.toLowerCase().includes(q) ||
-            item.description.toLowerCase().includes(q) ||
-            item.category.toLowerCase().includes(q)
+            (item.title || '').toLowerCase().includes(q) ||
+            (item.description || '').toLowerCase().includes(q) ||
+            (item.category || '').toLowerCase().includes(q)
         );
         setResults(filtered);
     }, [query, allNews]);
