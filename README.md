@@ -25,9 +25,9 @@ Proje, bileşen tabanlı bir mimari ile organize edilmiştir:
 Projeyi kendi bilgisayarınızda çalıştırmak için:
 
 1. Depoyu klonlayın:
-   `git clone https://github.com/tufancaliskan/ai-news-projesi.git`
+   `git clone https://github.com/Mertts0612/News-AI-Projesi.git`
 2. Klasöre girin:
-   `cd ai-news-projesi`
+   `cd News-AI-Projesi`
 3. Bağımlılıkları yükleyin:
    `npm install`
 4. Projeyi başlatın:
