@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\services\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:services\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\services\\weatherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:services\\weatherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CurrencyService.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\CurrencyService.cs",
-              "RelativeDocumentMoniker": "Services\\CurrencyService.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\CurrencyService.cs",
-              "RelativeToolTip": "Services\\CurrencyService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "WeatherService.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\WeatherService.cs",
+              "RelativeDocumentMoniker": "Services\\WeatherService.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\WeatherService.cs",
+              "RelativeToolTip": "Services\\WeatherService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-08T23:32:06.947Z",
+              "WhenOpened": "2026-02-25T01:52:17.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T01:47:28.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "newscontroller.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Controllers\\newscontroller.cs",
+              "RelativeDocumentMoniker": "Controllers\\newscontroller.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Controllers\\newscontroller.cs",
+              "RelativeToolTip": "Controllers\\newscontroller.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAAB8AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T00:28:10.276Z",
               "EditorCaption": ""
             }
           ]

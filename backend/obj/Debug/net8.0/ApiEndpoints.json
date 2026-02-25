@@ -18,9 +18,35 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "topic",
-        "Type": "System.String",
+        "Name": "isArchive",
+        "Type": "System.Boolean",
         "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "IncrementClick",
+    "RelativePath": "api/News/click/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -33,6 +59,47 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "GetEarthquakes",
+    "RelativePath": "api/News/earthquakes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "GetFeaturedNews",
+    "RelativePath": "api/News/featured",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "GetWeather",
+    "RelativePath": "api/News/weather",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lat",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "lon",
+        "Type": "System.Double",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   }
 ]
