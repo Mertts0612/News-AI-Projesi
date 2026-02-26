@@ -59,13 +59,12 @@ namespace newsai_webapi.Services
 
                     foreach (var item in feed.Items)
                     {
-                        if (sourceArticles.Count >= 7) break; // Her kaynaktan biraz daha fazla haber alalım
+                        if (sourceArticles.Count >= 7) break;
 
                         var title = item.Title?.Text ?? "Başlık Yok";
                         var link = item.Links.FirstOrDefault()?.Uri.ToString() ?? "";
                         var summaryText = item.Summary?.Text ?? "";
 
-                        // 1. Content:Encoded kısmını çek (Webrazzi ve Log burayı sever)
                         var contentText = "";
                         var contentExtension = item.ElementExtensions.FirstOrDefault(e => e.OuterName == "encoded");
                         if (contentExtension != null)
@@ -75,7 +74,6 @@ namespace newsai_webapi.Services
 
                         string imageUrl = "";
 
-                        // A - Media Content / Thumbnail Avı
                         var mediaExtensions = item.ElementExtensions.Where(e => e.OuterName == "content" || e.OuterName == "thumbnail");
                         foreach (var ext in mediaExtensions)
                         {
@@ -88,19 +86,15 @@ namespace newsai_webapi.Services
                             catch { }
                         }
 
-                        // B - Enclosure Avı
                         if (string.IsNullOrEmpty(imageUrl))
                         {
                             var enclosure = item.Links.FirstOrDefault(l => l.RelationshipType == "enclosure");
                             if (enclosure != null) imageUrl = enclosure.Uri.ToString();
                         }
 
-                        // C - Regex ile HTML İçinden Resim Cımbızlama (Google News ve Webrazzi için en garantisi)
                         if (string.IsNullOrEmpty(imageUrl))
                         {
-                            // Hem özette hem de tam içerikte ara
                             var combinedHtml = summaryText + contentText;
-                            // Regex'i daha esnek hale getirdik
                             var match = Regex.Match(combinedHtml, @"<img[^>]+src=[""']([^""']+)[""']", RegexOptions.IgnoreCase);
                             if (match.Success)
                             {
@@ -109,7 +103,6 @@ namespace newsai_webapi.Services
                             }
                         }
 
-                        // D - Hiçbir şey bulunamazsa Stok Resim ver (En azından boş kalmasın)
                         if (string.IsNullOrEmpty(imageUrl))
                         {
                             string categoryHint = !string.IsNullOrWhiteSpace(topic) ? topic : title;
@@ -130,7 +123,7 @@ namespace newsai_webapi.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"⚠️ Kaynak Hatası ({url}): {ex.Message}");
+                    Console.WriteLine($"Kaynak Hatası ({url}): {ex.Message}");
                 }
             }
 

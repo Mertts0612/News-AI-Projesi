@@ -17,7 +17,7 @@ namespace newsai_webapi.Workers
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
-        // DİKKAT: Arkadaşın AI servisini bitirince bu linki sana verecek. 
+        // DİKKAT: AI servisi bitirince bu linki sana verecek. 
         // Şimdilik test için localhost:8000 yazıyoruz.
         private readonly string _fastApiUrl = "http://localhost:8000/process-news";
 
@@ -34,14 +34,13 @@ namespace newsai_webapi.Workers
                 {
                     Console.WriteLine("Haber Ajanı: İnternetten yeni haberler taranıyor...");
                     await ProcessAndSaveNewsAsync();
-                    await CleanOldNewsAsync(); // Senin istediğin 3 aylık temizlik!
+                    await CleanOldNewsAsync();
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"❌ Haber Ajanı Hatası: {ex.Message}");
                 }
 
-                // Ajan her 1 saatte bir çalışır. İstersen FromMinutes(30) yapabilirsin.
                 await Task.Delay(TimeSpan.FromHours(1), stoppingToken);
             }
         }
@@ -51,21 +50,18 @@ namespace newsai_webapi.Workers
             using var scope = _scopeFactory.CreateScope();
             var _context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            // RssService'i projeye çağırıyoruz
             var _rssService = scope.ServiceProvider.GetRequiredService<RssService>();
 
-            // 1. GERÇEK RSS'TEN HABERLERİ ÇEK
             var rssHaberleri = _rssService.GetNews("");
 
             using var httpClient = new HttpClient();
 
             foreach (var item in rssHaberleri)
             {
-                // 1. Haber daha önce kaydedilmiş mi?
+
                 bool isExists = _context.News.Any(n => n.SourceUrl == item.SourceUrl);
                 if (isExists) continue;
 
-                // 2. AI'a gidecek paket
                 var newsRequest = new
                 {
                     title = item.Title,
@@ -104,22 +100,22 @@ namespace newsai_webapi.Workers
                         _context.News.Add(newHaber);
                         await _context.SaveChangesAsync();
 
-                        Console.WriteLine($"✅ AI Onaylı Yeni Haber Eklendi: {item.Title}");
+                        Console.WriteLine($"AI Onaylı Yeni Haber Eklendi: {item.Title}");
                     }
                 }
                 catch (Exception)
                 {
-                    // İŞTE YENİ EKLENEN YEDEK PLAN (FALLBACK) BURASI
-                    Console.WriteLine($"⚠️ AI Kapalı! Yedek Plan Devrede, Ham Haber Kaydediliyor: {item.Title}");
+                    // YEDEK PLAN
+                    Console.WriteLine($"AI Kapalı! Yedek Plan Devrede, Ham Haber Kaydediliyor: {item.Title}");
 
                     var fallbackHaber = new NewsData
                     {
                         Title = item.Title,
-                        Description = item.Description, // AI olmadığı için RSS'in kendi özetini kullan
+                        Description = item.Description,
                         OriginalContent = item.Description,
                         SourceUrl = item.SourceUrl,
-                        Category = "Genel", // AI kategorize edemediği için "Genel"
-                        IsVerified = false, // AI doğrulamadığı için "False"
+                        Category = "Genel", 
+                        IsVerified = false,
                         PublishedAt = DateTime.UtcNow,
                         Views = 0,
                         ImageUrl = item.ImageUrl

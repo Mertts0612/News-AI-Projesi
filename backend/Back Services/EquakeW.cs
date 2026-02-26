@@ -24,7 +24,6 @@ namespace newsai_webapi.Workers
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            // Ajanımız uygulama kapanana kadar sürekli dönecek
             while (!stoppingToken.IsCancellationRequested)
             {
                 try
@@ -36,8 +35,6 @@ namespace newsai_webapi.Workers
                 {
                     Console.WriteLine($"Ajan Hatası: {ex.Message}");
                 }
-
-                // 5 DAKİKA BEKLE VE TEKRARLA (Süreyi buradan ayarlayabilirsin)
                 await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
             }
         }
@@ -85,10 +82,8 @@ namespace newsai_webapi.Workers
 
                             string rawLocation = string.Join(" ", locParts).Trim();
 
-                            // YENİ AI SİSTEMİ: Ham lokasyonu AI metodumuza gönderiyoruz!
                             string aiCleanedLocation = await CleanLocationWithAI(rawLocation);
 
-                            // AI'dan gelen verinin baş harflerini büyük yapıyoruz
                             string finalLocation = trCulture.TextInfo.ToTitleCase(aiCleanedLocation.ToLower(trCulture));
                             string dateStr = parts[0] + " " + parts[1];
 
@@ -102,7 +97,7 @@ namespace newsai_webapi.Workers
                                     Magnitude = mwValue,
                                     Date = dateStr
                                 });
-                                await _context.SaveChangesAsync(); // Asekron kaydetme işlemi daha performanslıdır
+                                await _context.SaveChangesAsync();
                                 savedCount++;
                             }
                         }
@@ -112,10 +107,6 @@ namespace newsai_webapi.Workers
             }
             if (savedCount > 0) Console.WriteLine($"{savedCount} yeni deprem veritabanına eklendi!");
         }
-
-        // ==========================================
-        // YENİ EKLENEN AI TEMİZLEME METODU
-        // ==========================================
         private async Task<string> CleanLocationWithAI(string rawLocation)
         {
             try

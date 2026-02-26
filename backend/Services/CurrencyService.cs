@@ -14,14 +14,12 @@ namespace newsai_webapi.Services
             var list = new List<CurrencyData>();
             var trCulture = new CultureInfo("tr-TR");
 
-            // --- 1. KÜRESEL VERİLER (Kusursuz Yahoo Finance) ---
             double usd = GetYahooPrice("TRY=X");
             double eur = GetYahooPrice("EURTRY=X");
             double bist = GetYahooPrice("XU100.IS");
             double goldOz = GetYahooPrice("GC=F");
             double btc = GetYahooPrice("BTC-USD");
 
-            // --- 2. KAPALIÇARŞI FİZİKİ ALTIN FİYATI ---
             string kapalicarsiAltinStr = "0,00";
             decimal kapalicarsiAltinVal = 0;
             try
@@ -29,13 +27,11 @@ namespace newsai_webapi.Services
                 using var client = new HttpClient();
                 client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
 
-                // Kapalıçarşı fiyatı için Türkiye'nin en sağlam serbest piyasa API'si
                 string json = client.GetStringAsync("https://api.genelpara.com/embed/para-birimleri.json").Result;
 
                 using var doc = JsonDocument.Parse(json);
                 var root = doc.RootElement;
 
-                // GA = Gram Altın. ".ToString()" kullandığımız için sayı da gelse metin de gelse ÇÖKMEZ.
                 if (root.TryGetProperty("GA", out var goldElement) && goldElement.TryGetProperty("satis", out var satisVal))
                 {
                     kapalicarsiAltinStr = satisVal.ToString().Replace(".", ",");
@@ -44,16 +40,12 @@ namespace newsai_webapi.Services
             }
             catch { }
 
-            // YEDEK PLAN: Türkiye API'si anlık yanıt vermezse, Dünya ONS'u üzerinden "Makaslı" hesapla!
             if (kapalicarsiAltinVal == 0 && usd > 0 && goldOz > 0)
             {
                 double ekranAltin = (goldOz / 31.1034768) * usd;
-                double makasliAltin = ekranAltin + 150; // Fiziki altın için tahmini makas (Kuyumcu kârı)
+                double makasliAltin = ekranAltin + 150; 
                 kapalicarsiAltinVal = Convert.ToDecimal(makasliAltin);
             }
-
-            // --- 3. LİSTEYİ DOLDURMA (Ekranda Çıkacak Sırayla) ---
-            // YENİ MODEL: Price yerine Buying ve Selling kullanıyoruz. ChangeRate henüz veritabanından gelmediği için 0.
 
             list.Add(new CurrencyData
             {
@@ -102,8 +94,6 @@ namespace newsai_webapi.Services
 
             return list;
         }
-
-        // --- YAHOO FINANCE BAĞLANTI MOTORU ---
         private double GetYahooPrice(string symbol)
         {
             try
@@ -121,7 +111,7 @@ namespace newsai_webapi.Services
             }
             catch
             {
-                return 0; // Bir sorun olursa site patlamasın diye 0 döner
+                return 0; 
             }
         }
     }

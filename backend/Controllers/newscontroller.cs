@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using newsai_webapi.Data;
 using newsai_webapi.Models;
-using newsai_webapi.Services; // WeatherService'e ulaşmak için şart
+using newsai_webapi.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,16 +13,13 @@ namespace newsai_webapi.Controllers
     public class NewsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly WeatherService _weatherService; // Servisi buraya tanımladık
-
-        // Constructor: Hem veritabanını hem de hava durumu servisini sisteme dahil ediyoruz
+        private readonly WeatherService _weatherService;
         public NewsController(AppDbContext context, WeatherService weatherService)
         {
             _context = context;
             _weatherService = weatherService;
         }
 
-        // --- 1. HABERLER (Sayfalamalı) ---
         [HttpGet]
         public IActionResult GetNews(bool isArchive = false, int page = 1, int pageSize = 20)
         {
@@ -55,7 +52,6 @@ namespace newsai_webapi.Controllers
             return Ok(news);
         }
 
-        // --- 2. TIKLANMA SAYACI ---
         [HttpPost("click/{id}")]
         public async Task<IActionResult> IncrementClick(int id)
         {
@@ -68,7 +64,6 @@ namespace newsai_webapi.Controllers
             return Ok(new { message = "Tıklanma kaydedildi." });
         }
 
-        // --- 3. ÖNE ÇIKAN HABER ---
         [HttpGet("featured")]
         public IActionResult GetFeaturedNews()
         {
@@ -92,13 +87,11 @@ namespace newsai_webapi.Controllers
             return Ok(featured);
         }
 
-        // --- 4. HAVA DURUMU (YENİ!) ---
         [HttpGet("weather")]
         public async Task<IActionResult> GetWeather([FromQuery] double lat, [FromQuery] double lon)
         {
             try
             {
-                // Artık static olmayan metodumuzu nesne üzerinden güvenle çağırıyoruz
                 var weather = await _weatherService.GetWeatherAsync(lat, lon);
                 return Ok(weather);
             }
@@ -108,11 +101,9 @@ namespace newsai_webapi.Controllers
             }
         }
 
-        // --- 5. DÖVİZ ---
         [HttpGet("currencies")]
         public IActionResult GetCurrencies() => Ok(_context.Currencies.OrderBy(c => c.Id).ToList());
 
-        // --- 6. DEPREMLER ---
         [HttpGet("earthquakes")]
         public IActionResult GetEarthquakes()
         {

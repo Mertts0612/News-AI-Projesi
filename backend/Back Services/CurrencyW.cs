@@ -32,11 +32,9 @@ namespace newsai_webapi.Workers
                 }
                 catch (Exception ex)
                 {
-                    // Ana döngüdeki hataları yakalar
                     Console.WriteLine($"Döviz Ajanı Beklenmedik Hata: {ex.Message}");
                 }
 
-                // 15 dakikada bir çalışır
                 await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken);
             }
         }
@@ -48,7 +46,7 @@ namespace newsai_webapi.Workers
 
             try
             {
-                // 1. Piyasadan Yeni Fiyatları Çek
+                // 1. Fiyatları Çek
                 decimal usd = GetYahooPrice("TRY=X");
                 decimal eur = GetYahooPrice("EURTRY=X");
                 decimal bist = GetYahooPrice("XU100.IS");
@@ -62,13 +60,13 @@ namespace newsai_webapi.Workers
                 await ProcessCurrencyAsync(_context, "XU100", "BIST 100", bist);
                 await ProcessCurrencyAsync(_context, "BTC", "Bitcoin", btc);
 
-                // 3. Kaydetmeyi Dene
+                // 3. Kaydet
                 await _context.SaveChangesAsync();
                 Console.WriteLine("Döviz kurları ve değişim yüzdeleri başarıyla güncellendi!");
             }
             catch (Exception ex)
             {
-                // Veritabanı veya işlem hatalarını detaylıca yazdırır
+                // Veritabanı veya işlem hataları
                 var innerMsg = ex.InnerException != null ? ex.InnerException.Message : "Ek detay yok.";
                 Console.WriteLine("KRİTİK VERİTABANI HATASI!");
                 Console.WriteLine($"Hata Mesajı: {ex.Message}");
@@ -110,8 +108,6 @@ namespace newsai_webapi.Workers
                 existingCurrency.LastUpdated = DateTime.UtcNow;
             }
         }
-
-        // --- Veri Çekme Motorları ---
         private decimal GetYahooPrice(string symbol)
         {
             try
