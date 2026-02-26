@@ -1,3 +1,4 @@
+ HEAD
 # Adaptif Haber Özetleme ve Doğrulama API
 
 LLM tabanlı, bilgi sıkıştırma (information compression) yaklaşımıyla çalışan ve üretilen çıktıyı otomatik doğrulayan REST API servisi.
@@ -71,3 +72,7 @@ Bu yapı, üretken modellerde güvenilirlik katmanı oluşturur.
 ## 🔌 API Tanımı
 
 ### Endpoint
+
+# News-AI-Projesi
+"Kullanıcının seçtiği ilgi alanlarına ve anlık aramasına göre Google News RSS'den haber başlıklarını çeken, açık kaynak bir AI modeliyle bu haberlerin metnini özetleyen ve listeleyen basit bir web uygulaması."
+ 5abe3d38a939fce58a6223db5b7c390bd860875b
