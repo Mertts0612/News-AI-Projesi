@@ -1,0 +1,38 @@
+/**
+ * 1. Evrensel sıfırlama: margin, padding ve box-sizing.
+ * 2. :root ile renk paleti ve tema değişkenleri.
+ * 3. body arka plan, font ve metin ayarları.
+ * 4. App kapsayıcısı için temel stiller.
+ * 5. Alt bileşenlere standart görsel temel sağlar.
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
+    --bg-card: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent-blue: #00d4ff;
+    --accent-purple: #9d4edd;
+    --accent-green: #00ff88;
+    --accent-red: #ff4d6d;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+#root, .App {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}

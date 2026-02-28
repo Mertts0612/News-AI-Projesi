@@ -1,0 +1,186 @@
+/* Ana Kapsayıcı */
+.detail-content-container {
+    max-width: 1150px !important;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+/* Başlık */
+.detail-title {
+    font-size: 3.8rem !important;
+    line-height: 1.1 !important;
+    text-align: left !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 2rem !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+/* Header Bölümü */
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+    margin-top: 2rem !important;
+    margin-bottom: 3rem !important;
+    text-align: left !important;
+}
+/* İstatistik Paneli - Hem siyahta hem beyazda görünür orta ton */
+.meta-panel {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-start !important;
+    border-top: 1px solid rgba(128, 128, 128, 0.25) !important; 
+    border-bottom: 1px solid rgba(128, 128, 128, 0.25) !important;
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    width: 100%;
+}
+/* Görsel Kapsayıcısı */
+.news-image-wrapper {
+    width: 100%;
+    height: 220px; /* Küçültülmüş görsel alanı */
+    background: linear-gradient(135deg, #1a1a1a, #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden; /* Resmin köşelerden taşmasını engeller */
+}
+/* API/Mock'tan Gelen Resmin Stili */
+.detail-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Resmi yamultmadan alanı tamamen doldurur */
+    object-position: center;
+}
+/* --- Genel Hizalamalar (JSX'ten Buraya Taşındı) --- */
+.back-link-btn {
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    color: #00d4ff; 
+    font-weight: bold;
+    margin-bottom: 3rem; 
+    padding-top: 2rem;
+}
+
+.news-spot-text {
+    font-size: 1.5rem; 
+    border-left: 4px solid #00d4ff;
+    padding-left: 1.5rem; 
+    margin-bottom: 2.5rem; 
+    font-weight: 500;
+    color: #ffffff; /* Karanlık mod varsayılan */
+}
+
+.description-text {
+    font-size: 1.2rem; 
+    line-height: 1.8; 
+    color: #a0a0a0; /* Karanlık mod varsayılan */
+}
+
+.info-box-ai, .info-box-source {
+    margin-top: 1.5rem; 
+    padding: 2rem; 
+    background: rgba(255,255,255,0.03);
+    border-radius: 15px; 
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-bottom-section {
+    margin-top: 5rem; 
+    padding-bottom: 2rem; 
+    text-align: center;
+}
+.info-label { color: #00d4ff; }
+.source-link { color: #a0cfff; text-decoration: underline; word-break: break-all; }
+/* ==========================================================================
+    LIGHT MODE - FİNAL PREMIUM & TEKNOLOJİK TASARIM
+   ========================================================================== */
+
+   [data-theme="light"] .detail-page {
+    /* Saf beyaz yerine yumuşak, gözü dinlendiren gri-mavi tonu */
+    background-color: #f4f7fa; 
+    background-image: radial-gradient(#cfd8dc 0.8px, transparent 0.8px);
+    background-size: 24px 24px;
+}
+[data-theme="light"] .detail-content-container {
+    /* Tam beyaz yerine 'Pure White' hissi veren ama daha yumuşak bir ton */
+    background-color: #fcfdfe; 
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.05); /* Yumuşak gölge */
+    border-radius: 30px;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    padding: 3rem 60px 60px 60px;
+    /* Kenar çizgisi beyaz kartı arka plandan nazikçe ayırır */
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    border-top: 6px solid #00d4ff; 
+}
+
+/* Tipografi - Net ve Tok Renkler */
+[data-theme="light"] .detail-title,
+[data-theme="light"] .news-spot-text,
+[data-theme="light"] .header-section {
+    color: #1a1a1a;
+}
+
+[data-theme="light"] .description-text {
+    color: #333333; /* Tam okunur koyu gri */
+    opacity: 1;
+}
+
+/* İstatistik Paneli - Hap (Pill) Tasarımı */
+[data-theme="light"] .meta-panel {
+    border: none; /* Çizgileri kaldırıp daha modern duran kutucuklara geçtik */
+    gap: 1rem;
+}
+
+[data-theme="light"] .meta-panel span {
+    background: #f0f3f7;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: #4a4a4a;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+/* Görsel Kapsayıcısı */
+[data-theme="light"] .news-image-wrapper {
+    background: #f1f3f5;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* AI Analiz Kutusu - Teknolojik Vurgu */
+[data-theme="light"] .info-box-ai {
+    background: linear-gradient(to right, #ffffff, #f9f5ff) !important;
+    border-left: 6px solid #a855f7 !important; /* AI Moru */
+    margin-top: 3rem !important; /* Sıkışıklığı gideren boşluk */
+    padding: 2.5rem !important;
+    color: #222;
+}
+
+/* Kaynak Kutusu - Güvenilir Vurgu */
+[data-theme="light"] .info-box-source {
+    background: linear-gradient(to right, #ffffff, #f0fbff) !important;
+    border-left: 6px solid #00d4ff !important; /* Kaynak Mavisi */
+    margin-top: 2rem !important;
+    padding: 2.5rem !important;
+    color: #222;
+}
+
+/* Navigasyon ve Footer */
+[data-theme="light"] .back-link-btn {
+    color: #00d4ff;
+}
+
+[data-theme="light"] .footer-bottom-section p {
+    color: #888;
+}
+
+
+
+
+

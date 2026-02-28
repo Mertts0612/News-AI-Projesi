@@ -1,0 +1,228 @@
+/* LaLiga / Maç istatistikleri widget – sabit boyut, alta açılmaz */
+.match-stats-widget {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    max-width: 380px;
+    overflow: hidden;
+}
+
+.match-widget-header {
+    margin-bottom: 1rem;
+}
+
+.match-widget-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.match-widget-league-icon {
+    font-size: 1.25rem;
+}
+
+.match-widget-league-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.match-widget-chevron {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.match-widget-more {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+}
+
+.match-widget-region {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0.35rem 0 0 0;
+}
+
+/* Carousel */
+.match-widget-carousel-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.match-widget-arrow {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.match-widget-arrow:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--accent-blue);
+}
+
+.match-widget-carousel {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 0;
+}
+
+.match-widget-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.match-widget-card {
+    flex: 0 0 160px;
+    scroll-snap-align: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.match-widget-card:hover,
+.match-widget-card.active {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.08);
+}
+
+.match-card-top {
+    margin-bottom: 0.5rem;
+}
+
+.match-card-status {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.match-card-teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.match-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.match-team-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.match-team-placeholder {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--team-bg, rgba(255,255,255,0.1));
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #fff;
+}
+
+.match-team-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 52px;
+    text-align: center;
+}
+
+.match-card-score {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.match-score-sep {
+    margin: 0 2px;
+    opacity: 0.7;
+}
+
+.match-time {
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+}
+
+/* Dots + show more */
+.match-widget-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.match-widget-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.match-widget-dot.active {
+    background: var(--accent-blue);
+    transform: scale(1.2);
+}
+
+.match-widget-show-more {
+    display: block;
+    text-align: center;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    text-decoration: none;
+}
+
+.match-widget-show-more:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .match-stats-widget {
+        max-width: 100%;
+    }
+    .match-widget-card {
+        flex: 0 0 140px;
+    }
+}

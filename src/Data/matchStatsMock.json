@@ -1,0 +1,106 @@
+{
+  "leagueName": "LaLiga",
+  "leagueIcon": "laliga",
+  "regionLabel": "Bölgenizde popüler",
+  "showMoreLabel": "Daha fazla LaLiga göster",
+  "matches": [
+    {
+      "id": "1",
+      "status": "Final",
+      "date": "27 Şub",
+      "time": null,
+      "score": { "home": 2, "away": 0 },
+      "homeTeam": {
+        "name": "Levante",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/en/2/2f/Levante_UD_logo.svg",
+        "bgColor": "#c41e3a"
+      },
+      "awayTeam": {
+        "name": "Alaves",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/en/c/cc/Deportivo_Alav%C3%A9s_logo.svg",
+        "bgColor": "#0054a4"
+      },
+      "statistics": [
+        { "name": "Kaleyi bulan şut", "homeValue": 5, "awayValue": 6 },
+        { "name": "Toplam şut sayısı", "homeValue": 19, "awayValue": 16 },
+        { "name": "Sarı Kartlar", "homeValue": 1, "awayValue": 5 },
+        { "name": "Kırmızı Kartlar", "homeValue": 0, "awayValue": 0 },
+        { "name": "Ofsaytlar", "homeValue": 1, "awayValue": 1 },
+        { "name": "Kornerler", "homeValue": 10, "awayValue": 6 },
+        { "name": "Fauller", "homeValue": 13, "awayValue": 16 }
+      ]
+    },
+    {
+      "id": "2",
+      "status": "Upcoming",
+      "date": "28 Şub",
+      "time": "16:00",
+      "score": null,
+      "homeTeam": {
+        "name": "Vallecano",
+        "logoUrl": "",
+        "bgColor": "#c41e3a"
+      },
+      "awayTeam": {
+        "name": "A.Bilbao",
+        "logoUrl": "",
+        "bgColor": "#ed1c24"
+      },
+      "statistics": []
+    },
+    {
+      "id": "3",
+      "status": "Upcoming",
+      "date": "28 Şub",
+      "time": "18:15",
+      "score": null,
+      "homeTeam": {
+        "name": "Barcelona",
+        "logoUrl": "",
+        "bgColor": "#a50044"
+      },
+      "awayTeam": {
+        "name": "Villarreal",
+        "logoUrl": "",
+        "bgColor": "#ffcd00"
+      },
+      "statistics": []
+    },
+    {
+      "id": "4",
+      "status": "Upcoming",
+      "date": "28 Şub",
+      "time": "20:30",
+      "score": null,
+      "homeTeam": {
+        "name": "Mallorca",
+        "logoUrl": "",
+        "bgColor": "#c41e3a"
+      },
+      "awayTeam": {
+        "name": "R.Sociedad",
+        "logoUrl": "",
+        "bgColor": "#0066b3"
+      },
+      "statistics": []
+    },
+    {
+      "id": "5",
+      "status": "Upcoming",
+      "date": "28 Şub",
+      "time": "23:00",
+      "score": null,
+      "homeTeam": {
+        "name": "Real Oviedo",
+        "logoUrl": "",
+        "bgColor": "#6cb33f"
+      },
+      "awayTeam": {
+        "name": "A.Madrid",
+        "logoUrl": "",
+        "bgColor": "#cb3529"
+      },
+      "statistics": []
+    }
+  ]
+}
