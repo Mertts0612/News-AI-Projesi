@@ -1,0 +1,11 @@
+torch
+transformers
+requests
+beautifulsoup4
+newspaper3k
+lxml
+lxml_html_clean
+scikit-learn
+sentencepiece
+fastapi
+uvicorn
