@@ -1,0 +1,188 @@
+/* Sayfa – "Anlamaya Vakit Ayırın" başlık paleti (mavi-mor) ile uyumlu */
+.deprem-page {
+  min-height: 100vh;
+  background: var(--bg-primary, #0A0C10);
+  position: relative;
+  animation: depremPageEnter 0.5s ease-out forwards;
+}
+
+@keyframes depremPageEnter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.deprem-page[data-theme="light"] {
+  background: var(--bg-primary, #f0f4f8);
+}
+
+.deprem-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  animation: depremContentSlide 0.5s ease-out 0.1s forwards;
+}
+
+@keyframes depremContentSlide {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.deprem-content .back-nav {
+  margin-bottom: 1.5rem;
+}
+
+.deprem-content .back-link-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--accent-blue, #00d4ff);
+  transition: color 0.2s ease;
+}
+
+.deprem-content .back-link-btn:hover {
+  color: var(--accent-purple, #9d4edd);
+}
+
+.deprem-page[data-theme="light"] .deprem-content .back-link-btn {
+  color: #0099c7;
+}
+
+.deprem-page[data-theme="light"] .deprem-content .back-link-btn:hover {
+  color: #7b2cbf;
+}
+
+/* Başlık – mavi-mor vurgu (Anlamaya Vakit Ayırın paleti) */
+.deprem-page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(0, 212, 255, 0.35);
+}
+
+.deprem-page[data-theme="light"] .deprem-page-title {
+  color: var(--text-primary);
+  border-bottom-color: rgba(157, 78, 221, 0.4);
+}
+
+.deprem-loading,
+.deprem-error,
+.deprem-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.deprem-page[data-theme="light"] .deprem-loading,
+.deprem-page[data-theme="light"] .deprem-empty {
+  color: var(--text-secondary);
+}
+
+.deprem-error p {
+  color: #ff6b6b;
+}
+
+.deprem-page[data-theme="light"] .deprem-error p {
+  color: #c92a2a;
+}
+
+/* Tablo kartı – tema uyumlu, hover’da mint glow */
+.deprem-table-wrap {
+  background: var(--bg-card, #141820);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deprem-table-wrap:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 16px rgba(157, 78, 221, 0.12);
+}
+
+.deprem-page[data-theme="light"] .deprem-table-wrap {
+  background: var(--bg-card);
+  border-color: var(--border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.deprem-page[data-theme="light"] .deprem-table-wrap:hover {
+  border-color: rgba(157, 78, 221, 0.35);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.deprem-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.deprem-table th,
+.deprem-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.deprem-table th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.deprem-page[data-theme="light"] .deprem-table th {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-secondary);
+}
+
+.deprem-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.deprem-table tbody tr:hover {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.deprem-page[data-theme="light"] .deprem-table tbody tr:hover {
+  background: rgba(157, 78, 221, 0.08);
+}
+
+.deprem-table .deprem-yer {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.deprem-table .deprem-mag {
+  color: var(--accent-blue, #00d4ff);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+
+.deprem-page[data-theme="light"] .deprem-table .deprem-mag {
+  color: #7b2cbf;
+}
+
+.deprem-table .deprem-derinlik,
+.deprem-table .deprem-saat {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.deprem-table .deprem-saat {
+  font-family: 'Space Mono', monospace;
+}
+
+@media (max-width: 640px) {
+  .deprem-table th,
+  .deprem-table td {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}

@@ -1,10 +1,40 @@
+/* Sayfa – hava durumu sayfasıyla aynı yumuşak giriş animasyonu */
+.detail-page {
+    animation: detailPageEnter 0.5s ease-out forwards;
+}
+
+@keyframes detailPageEnter {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.detail-page .detail-content-container {
+    animation: detailContentSlide 0.5s ease-out 0.1s forwards;
+    opacity: 0;
+}
+
+@keyframes detailContentSlide {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Ana Kapsayıcı */
 .detail-content-container {
     max-width: 1150px !important;
     margin: 0 auto;
     padding: 0 40px;
 }
-/* Başlık */
+/* Başlık – Dark modda beyaz */
 .detail-title {
     font-size: 3.8rem !important;
     line-height: 1.1 !important;
@@ -14,6 +44,14 @@
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    color: #ffffff !important;
+}
+
+.detail-page .detail-title.gradient-text {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
 }
 /* Header Bölümü */
 .header-section {
@@ -69,11 +107,11 @@
 
 .news-spot-text {
     font-size: 1.5rem; 
-    border-left: 4px solid #00d4ff;
+    border-left: 4px solid var(--text-accent, #5EEAD4);
     padding-left: 1.5rem; 
     margin-bottom: 2.5rem; 
     font-weight: 500;
-    color: #ffffff; /* Karanlık mod varsayılan */
+    color: #ffffff;
 }
 
 .description-text {
@@ -88,6 +126,38 @@
     background: rgba(255,255,255,0.03);
     border-radius: 15px; 
     border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* İlgili haberler bölümü */
+.related-news-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.related-news-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+.related-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+.related-news-grid .news-card {
+    margin: 0;
+}
+@media (max-width: 900px) {
+    .related-news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 560px) {
+    .related-news-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .footer-bottom-section {
@@ -120,11 +190,21 @@
     border-top: 6px solid #00d4ff; 
 }
 
-/* Tipografi - Net ve Tok Renkler */
-[data-theme="light"] .detail-title,
-[data-theme="light"] .news-spot-text,
-[data-theme="light"] .header-section {
-    color: #1a1a1a;
+/* Tipografi – Light modda başlıklar siyah */
+[data-theme="light"] .detail-page .detail-title,
+[data-theme="light"] .detail-page .detail-title.gradient-text {
+    color: #000000 !important;
+    background: none !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+[data-theme="light"] .detail-page .news-spot-text,
+[data-theme="light"] .detail-page .header-section {
+    color: #000000;
+}
+
+[data-theme="light"] .detail-page .related-news-title {
+    color: #000000;
 }
 
 [data-theme="light"] .description-text {
@@ -178,6 +258,10 @@
 
 [data-theme="light"] .footer-bottom-section p {
     color: #888;
+}
+
+[data-theme="light"] .related-news-section {
+    border-top-color: rgba(0, 0, 0, 0.08);
 }
 
 

@@ -13,11 +13,10 @@ import TopBar from '../TopBar/TopBar';
 import NewsCard from '../NewsCard/NewsCard';
 import { useCurrencies } from '../hooks/useCurrencies';
 import { getNewsData } from '../services/newsDataApi';
+import { categories } from '../constants/categories';
 import './SearchResults.css';
 
-const categories = ["Tümü", "Teknoloji", "Siyaset", "Gündem", "Spor", "Ekonomi", "Sağlık", "Eğitim"];
-
-function SearchResults() {
+function SearchResults({ theme, toggleTheme }) {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const query = searchParams.get('q') || '';
@@ -27,15 +26,7 @@ function SearchResults() {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState("Tümü");
-    const [theme, setTheme] = useState(() => {
-        return document.documentElement.getAttribute('data-theme') || 'dark';
-    });
     const { currencies } = useCurrencies({ refreshInterval: 5000 });
-
-    // Tema yönetimi
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-    }, [theme]);
 
     // Haberleri newsData üzerinden yükle
     useEffect(() => {
@@ -68,13 +59,6 @@ function SearchResults() {
         setResults(filtered);
     }, [query, allNews]);
 
-    // Enter veya buton ile yeni arama
-    const handleSearch = (e) => {
-        if (e.key === 'Enter' && searchTerm.trim()) {
-            navigate(`/arama?q=${encodeURIComponent(searchTerm.trim())}`);
-        }
-    };
-
     return (
         <div className="search-page" data-theme={theme}>
             <div className="grain-overlay"></div>
@@ -86,7 +70,7 @@ function SearchResults() {
                 activeCategory={activeCategory}
                 setActiveCategory={setActiveCategory}
                 theme={theme}
-                toggleTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
+                toggleTheme={toggleTheme}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 onSearchNavigate={(term) => navigate(`/arama?q=${encodeURIComponent(term)}`)}

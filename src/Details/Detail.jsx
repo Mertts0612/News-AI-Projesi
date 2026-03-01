@@ -5,11 +5,12 @@
  * 4. Detay başlık, spot, görsel, açıklama ve meta paneli.
  * 5. Sayfa açılışında scroll en üste (useEffect, id bağımlı).
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getNewsData } from '../services/newsDataApi';
 import TopBar from '../TopBar/TopBar';
 import { useCurrencies } from '../hooks/useCurrencies';
+import NewsCard from '../NewsCard/NewsCard';
 import './Detail.css';
 
 function Detail() {
@@ -17,9 +18,33 @@ function Detail() {
   const navigate = useNavigate();
   const { currencies } = useCurrencies({ refreshInterval: 5000 });
   const [newsItem, setNewsItem] = useState(null);
+  const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageError, setImageError] = useState(false);
+
+  // İlgili 3 haber: API'de relatedNews varsa onu kullan, yoksa aynı kategoriden al
+  const relatedArticles = useMemo(() => {
+    if (!newsItem || !newsList.length) return [];
+    const list = Array.isArray(newsList) ? newsList : [];
+    const currentId = String(newsItem.id);
+    const category = newsItem.category;
+
+    if (Array.isArray(newsItem.relatedNews) && newsItem.relatedNews.length > 0) {
+      const resolved = newsItem.relatedNews
+        .map((ref) => {
+          const id = typeof ref === 'object' ? ref?.id : ref;
+          return list.find((n) => String(n.id) === String(id));
+        })
+        .filter(Boolean);
+      return resolved.slice(0, 3);
+    }
+
+    const sameCategory = list.filter(
+      (n) => String(n.id) !== currentId && (n.category || '') === (category || '')
+    );
+    return sameCategory.slice(0, 3);
+  }, [newsItem, newsList]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,7 +61,8 @@ function Detail() {
       .then(({ news }) => {
         if (cancelled) return;
         const list = Array.isArray(news) ? news : [];
-        const item = list.find((item) => String(item.id) === String(id));
+        const item = list.find((n) => String(n.id) === String(id));
+        setNewsList(list);
         setNewsItem(item ?? null);
       })
       .catch((err) => {
@@ -153,6 +179,17 @@ function Detail() {
             </a>
           </div>
         </article>
+
+        {relatedArticles.length > 0 && (
+          <section className="related-news-section">
+            <h2 className="related-news-title">Bu haberi okuyanlar şu 3 ilgili habere de bakabilir</h2>
+            <div className="related-news-grid">
+              {relatedArticles.map((article, index) => (
+                <NewsCard key={article.id} item={article} index={index} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
 
       <footer className="footer-bottom-section">

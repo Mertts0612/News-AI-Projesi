@@ -1,0 +1,86 @@
+/**
+ * DepremSummary bileşeni stilleri (deprem sayfası paleti: mavi/mor).
+ */
+.deprem-summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.deprem-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.deprem-summary-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.deprem-summary-link {
+  background: none;
+  border: none;
+  color: var(--accent-blue);
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.deprem-summary-link:hover {
+  text-decoration: underline;
+}
+
+.deprem-summary-loading {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.deprem-summary-empty {
+  color: var(--text-secondary);
+  padding: 1rem 0;
+  margin: 0;
+}
+
+.deprem-summary-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.deprem-summary-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.deprem-summary-item:last-child {
+  border-bottom: none;
+}
+
+.deprem-summary-yer {
+  color: var(--text-primary);
+}
+
+.deprem-summary-mag {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.deprem-summary-saat {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}

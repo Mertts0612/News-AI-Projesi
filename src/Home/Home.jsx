@@ -7,20 +7,20 @@
  * 4. TEMA KONTROLÜ: Aydınlık/Karanlık tema değişimini 'data-theme' özelliği üzerinden yönetir.
  * 5. ORKESTRASYON: TopBar, Header ve NewsCard gibi alt bileşenleri bir araya getirerek ana yapıyı oluşturur.
  */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopBar from "../TopBar/TopBar";
 import Header from "../Header/Header";
 import NewsCard from "../NewsCard/NewsCard";
 import { useCurrencies } from '../hooks/useCurrencies';
 import { getNewsData } from '../services/newsDataApi';
+import { categories } from '../constants/categories';
 import './Home.css';
 
-const categories = ["Tümü", "Teknoloji", "Siyaset", "Gündem", "Spor", "Ekonomi", "Eğitim"];
-
-function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
+function Home({ theme, toggleTheme }) {
     const navigate = useNavigate();
     const mainSectionRef = useRef(null);
+    const isInitialMount = useRef(true);
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState("Tümü");
@@ -43,22 +43,26 @@ function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
         loadData();
     }, []);
 
-    // Kategori değişiminde scroll - her kategori için tetiklenir
+    // Sayfa yenilendiğinde / ilk açıldığında en üstten başlat
     useEffect(() => {
-        if (mainSectionRef.current) {
-            const yOffset = -120;
-            const y = mainSectionRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-    }, [activeCategory]); // activeCategory her değiştiğinde bu blok tekrar çalışır
-    useEffect(() => {
-        // Sayfa yenilendiğinde tarayıcının eski scroll konumunu unutmasını sağlar
         if ('scrollRestoration' in window.history) {
             window.history.scrollRestoration = 'manual';
         }
-        // Her sayfa açılışında en tepeye (TopBar'a) çıkar
         window.scrollTo(0, 0);
     }, []);
+
+    // Kategori değişiminde scroll – sadece kullanıcı tıkladığında; DOM güncellendikten hemen sonra (tek kaydırma)
+    useLayoutEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            return;
+        }
+        if (!mainSectionRef.current) return;
+        const header = document.querySelector('.navbar');
+        const headerHeight = header ? header.offsetHeight + 16 : 180;
+        const y = mainSectionRef.current.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    }, [activeCategory]);
 
     // 4. Filtreleme ve Öne Çıkan Haber Mantığı
     const filteredNews = news.filter(item => {
@@ -120,7 +124,7 @@ function Home({ favoriteIds, toggleFavorite, theme, toggleTheme }) {
                 {/* Öne Çıkan Haber Alanı - sadece "Tümü" seçiliyken göster */}
                 {featuredNews && !loading && activeCategory === "Tümü" && (
                     <section className="featured-section">
-                        <h2 className="section-title">🔥 Öne Çıkan Haber</h2>
+                        <h2 className="section-title">Öne Çıkan Haber</h2>
                         <div
                             className="featured-card"
                             onClick={() => navigate(`/haber/${featuredNews.id}`)}

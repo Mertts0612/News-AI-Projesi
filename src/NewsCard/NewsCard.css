@@ -55,8 +55,9 @@
 .category-tag {
     display: inline-block;
     padding: 0.35rem 0.9rem;
-    background: rgba(0, 212, 255, 0.1);
-    color: var(--accent-blue);
+    background: rgba(255, 255, 255, 0.06);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
     border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 600;
@@ -122,6 +123,21 @@
 
 .importance-icon {
     font-size: 0.9rem;
+}
+
+.importance-stars {
+    gap: 0.05rem;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    color: #facc15;
+}
+
+.importance-stars .star {
+    font-size: 0.95rem;
+    line-height: 1;
+    color: inherit;
 }
 
 .news-card:hover .importance-badge {

@@ -1,8 +1,34 @@
-/* Sayfa – tema duyarlı */
+/* Sayfa – tema duyarlı; geçişte yumuşak giriş animasyonu */
 .weather-page {
   min-height: 100vh;
   background: var(--bg-primary, #0a0a0c);
   position: relative;
+  animation: weatherPageEnter 0.5s ease-out forwards;
+}
+
+@keyframes weatherPageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.weather-page .weather-content {
+  animation: weatherContentSlide 0.5s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+@keyframes weatherContentSlide {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .weather-page[data-theme="light"] {

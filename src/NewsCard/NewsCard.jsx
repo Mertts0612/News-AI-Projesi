@@ -3,7 +3,7 @@
  * 2. Tıklanınca /haber/:id sayfasına navigate; animationDelay ile sıralı görünüm.
  * 3. Favori: localStorage ve favoritesUpdated event; yıldız butonu toggle.
  * 4. timeAgo: publishedAt/date ile "X saat önce" hesaplanır; dakikada bir güncellenir.
- * 5. getImportanceColor ile önem yüzdesi rengi; favorited state Header ile senkron.
+ * 5. Önem yıldızları; favorited state Header ile senkron.
  */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -72,35 +72,26 @@ function NewsCard({ item, index }) {
     return () => clearInterval(interval);
   }, [item.publishedAt, item.date]);
 
-    
-    // 1. Durumu belirle
-    const isAdding = !isFavorited; 
-        // Çıkartma
   const toggleFavorite = (e) => {
     e.stopPropagation(); 
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
     if (isFavorited) {
         const updated = favorites.filter(id => id !== item.id);
-        // Ekleme
         localStorage.setItem('favorites', JSON.stringify(updated));
         setIsFavorited(false);
     } else {
         favorites.push(item.id);
         localStorage.setItem('favorites', JSON.stringify(favorites));
-    // 2. KRİTİK SATIR: Bu satır Header'ı dürter ve "Veri değişti, oku!" der.
         setIsFavorited(true);
     }
-  // Önem yüzdesine göre renk
-
     window.dispatchEvent(new Event('favoritesUpdated'));
 };
 
-  const getImportanceColor = (importance) => {
-    if (importance >= 90) return '#00d4ff';
-    if (importance >= 80) return '#9d4edd';
-    if (importance >= 70) return '#10b981';
-    return '#6b7280';
+  // Önem yüzdesini 1-5 yıldıza çevir (en yüksek = 5 yıldız)
+  const importanceToStars = (importance) => {
+    if (!importance) return 1;
+    return Math.min(5, Math.max(1, Math.ceil((Number(importance) / 100) * 5)));
   };
 
   return (
@@ -121,16 +112,17 @@ function NewsCard({ item, index }) {
       
       <div className="card-footer">
         <div className="card-meta-left">
-          {item.importance && (
+          {item.importance != null && (
             <span 
-              className="importance-badge"
-              style={{ 
-                color: getImportanceColor(item.importance),
-                borderColor: getImportanceColor(item.importance)
-              }}
+              className="importance-badge importance-stars"
+              title={`Önem: ${importanceToStars(item.importance)}/5`}
+              aria-label={`Önem seviyesi: ${importanceToStars(item.importance)} yıldız`}
             >
-              <span className="importance-icon">⚡</span>
-              %{item.importance}
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="star" aria-hidden>
+                  {i < importanceToStars(item.importance) ? '★' : '☆'}
+                </span>
+              ))}
             </span>
           )}
 

@@ -10,8 +10,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWeather } from '../hooks/useWeather';
-import { useEarthquakes } from '../hooks/useEarthquakes';
-import logoImg from '../assets/logo.png';
+import logoImg from '../assets/Logo.png';
 import './Header.css';
 
 function weatherIcon(durum) {
@@ -36,9 +35,6 @@ function Header({
     allNews = []
 }) {
     const navigate = useNavigate();
-    // Sidebar (kategoriler) açık/kapalı
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    const sidebarRef = useRef(null);
     // 1. Favori ID'lerini tutacak state
     const [favoriteIds, setFavoriteIds] = useState([]);
 
@@ -67,27 +63,22 @@ function Header({
     );
 
     const { weather } = useWeather({ refreshInterval: 60000 });
-    const { earthquakes } = useEarthquakes({ refreshInterval: 60000 });
-    const latestEarthquakes = [...(earthquakes || [])]
-        .sort((a, b) => new Date(b.saat || 0) - new Date(a.saat || 0))
-        .slice(0, 3);
     const [showFavorites, setShowFavorites] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [activeSuggestion, setActiveSuggestion] = useState(-1);
-    const wrapperRef = useRef(null);
+    const searchWrapperRef = useRef(null);
+    const favoritesWrapperRef = useRef(null);
 
-    // Dışarı tıklanınca kapat
+    // Dışarı tıklanınca kapat (hem arama önerileri hem favori paneli)
     useEffect(() => {
         function handleClickOutside(e) {
-            if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+            const outsideSearch = !searchWrapperRef.current?.contains(e.target);
+            const outsideFavorites = !favoritesWrapperRef.current?.contains(e.target);
+            if (outsideSearch && outsideFavorites) {
                 setShowSuggestions(false);
                 setActiveSuggestion(-1);
                 setShowFavorites(false);
-            }
-            // Sidebar dışına tıklanınca kapat
-            if (sidebarRef.current && !sidebarRef.current.contains(e.target) && !e.target.closest('.sidebar-toggle')) {
-                setSidebarOpen(false);
             }
         }
         document.addEventListener('mousedown', handleClickOutside);
@@ -157,89 +148,17 @@ function Header({
 
     return (
         <>
-            {/* Soldan açılan kategoriler için overlay */}
-            <div className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`} onClick={() => setSidebarOpen(false)} />
-
-            {/* Sol sidebar: Kategoriler */}
-            <aside className={`category-sidebar ${sidebarOpen ? 'open' : ''}`} ref={sidebarRef}>
-                <div className="sidebar-header">
-                    <span className="sidebar-title">Kategoriler</span>
-                    <button type="button" className="sidebar-close" onClick={() => setSidebarOpen(false)}>✕</button>
-                </div>
-
-                {/* Kategoriler listesi en üstte */}
-                <nav className="sidebar-nav">
-                    {categories.map(cat => (
-                        <button
-                            key={cat}
-                            type="button"
-                            className={`sidebar-item ${activeCategory === cat ? 'active' : ''}`}
-                            onClick={() => {
-                                setActiveCategory(cat);
-                                setSidebarOpen(false);
-                            }}
-                        >
-                            <span className="sidebar-item-icon">
-                                {cat === 'Tümü' && '📰'}
-                                {cat === 'Teknoloji' && '💻'}
-                                {cat === 'Siyaset' && '🏛️'}
-                                {cat === 'Gündem' && '📢'}
-                                {cat === 'Spor' && '⚽'}
-                                {cat === 'Ekonomi' && '💰'}
-                                {cat === 'Eğitim' && '📚'}
-                            </span>
-                            <span className="sidebar-item-text">{cat}</span>
-                            {activeCategory === cat && <span className="sidebar-item-check">✓</span>}
-                        </button>
-                    ))}
-                </nav>
-
-                {/* Son Depremler - kategorilerin altında */}
-                <div className="sidebar-earthquakes">
-                    <h3 className="sidebar-earthquakes-title">Son Depremler</h3>
-                    <ul className="sidebar-earthquakes-list">
-                        {latestEarthquakes.length === 0 ? (
-                            <li className="sidebar-earthquake-item empty">Veri yok</li>
-                        ) : (
-                            latestEarthquakes.map((eq) => (
-                                <li key={eq.id} className="sidebar-earthquake-item">
-                                    <span className="eq-row">
-                                        <span className="eq-yer">{eq.yer}</span>
-                                        <strong className="eq-mag">{eq.büyüklük}</strong>
-                                    </span>
-                                    <span className="eq-sub">
-                                        {eq.derinlik} km · {eq.saat ? new Date(eq.saat).toLocaleString('tr-TR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '–'}
-                                    </span>
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                </div>
-            </aside>
-
             <header className="navbar">
                 <div className="container">
                     <div className="header-content">
                         <div className="logo-section">
-                            <button
-                                type="button"
-                                className="sidebar-toggle"
-                                onClick={() => setSidebarOpen(!sidebarOpen)}
-                                title="Kategoriler"
-                            >
-                                <span className="hamburger-icon">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </span>
-                            </button>
-                            <div className="logo" style={{ cursor: 'pointer' }} onClick={() => navigate('/')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && navigate('/')}>
-                                AI News
+                            <div className="logo" style={{ cursor: 'pointer' }} onClick={() => navigate('/')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && navigate('/')} aria-label="Ana sayfaya git">
+                                <img src={logoImg} alt="AI News" className="logo-img" />
                             </div>
                         </div>
 
                         {/* Orta: Arama + Autocomplete */}
-                    <div className="search-container" ref={wrapperRef}>
+                    <div className="search-container" ref={searchWrapperRef}>
                         <div className="search-wrapper">
                             <span className="search-icon">🔍</span>
                             <input
@@ -308,7 +227,7 @@ function Header({
                         <button className="icon-button" onClick={toggleTheme} title="Tema Değiştir">
                             {theme === 'dark' ? '☀️' : '🌙'}
                         </button>
-                        <div className="favorites-wrapper" ref={wrapperRef}>
+                        <div className="favorites-wrapper" ref={favoritesWrapperRef}>
                             <button
                                 className={`icon-button ${favoriteIds.length > 0 ? 'has-favorites' : ''}`}
                                 onClick={(e) => {

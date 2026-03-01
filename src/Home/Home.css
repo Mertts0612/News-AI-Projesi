@@ -115,6 +115,10 @@
     padding: 2rem 0;
 }
 
+.featured-section .section-title {
+    margin-left: 6px;
+}
+
 .section-header {
     display: flex;
     justify-content: space-between;

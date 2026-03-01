@@ -102,3 +102,145 @@
 .currency-up, .currency-item .currency-up { color: var(--accent-green) !important; }
 .currency-down, .currency-item .currency-down { color: var(--accent-red) !important; }
 
+/* Deprem ikonu + hover dropdown (glassmorphism) */
+.top-bar-deprem-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Görünmez köprü: ikon ile dropdown arasında hover kesilmez */
+.top-bar-deprem-wrap::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 8px;
+}
+
+.top-bar-deprem-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: #00d4ff;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.top-bar-deprem-wrap:hover .top-bar-deprem-icon {
+  background: rgba(0, 212, 255, 0.12);
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.25);
+}
+
+.top-bar-deprem-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0;
+  min-width: 280px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.top-bar-deprem-wrap:hover .top-bar-deprem-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Glassmorphism panel */
+.top-bar-deprem-dropdown {
+  background: rgba(10, 12, 16, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.15);
+  padding: 12px 0 8px;
+}
+
+.top-bar-deprem-dropdown-header {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #00d4ff;
+  padding: 0 16px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+}
+
+.top-bar-deprem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar-deprem-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.top-bar-deprem-item:last-of-type {
+  border-bottom: none;
+}
+
+.top-bar-deprem-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.top-bar-deprem-yer {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.top-bar-deprem-mag {
+  color: #00d4ff;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+
+.top-bar-deprem-saat {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+}
+
+.top-bar-deprem-empty {
+  grid-template-columns: 1fr;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.top-bar-deprem-more {
+  display: block;
+  width: calc(100% - 24px);
+  margin: 10px 12px 4px;
+  padding: 8px 12px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(157, 78, 221, 0.35);
+  border-radius: 10px;
+  color: #00d4ff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.top-bar-deprem-more:hover {
+  background: rgba(157, 78, 221, 0.15);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
+}
+
