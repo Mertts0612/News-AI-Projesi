@@ -152,7 +152,7 @@ function Home({ theme, toggleTheme }) {
                                     <span className="date">{featuredNews.date}</span>
                                 </div>
                                 <h2>{featuredNews.title}</h2>
-                                <p>{featuredNews.description}</p>
+                                <p>{featuredNews.shortSummary}</p>
                                 <div className="card-footer">
                                     <span className="read-more">Devamını Oku</span>
                                 </div>

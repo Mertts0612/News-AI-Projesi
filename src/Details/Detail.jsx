@@ -23,6 +23,12 @@ function Detail() {
   const [error, setError] = useState(null);
   const [imageError, setImageError] = useState(false);
 
+  // NewsCard ile aynı hesap: önem yüzdesini 1-5 yıldıza çevir
+  const importanceToStars = (importance) => {
+    if (!importance) return 1;
+    return Math.min(5, Math.max(1, Math.ceil((Number(importance) / 100) * 5)));
+  };
+
   // İlgili 3 haber: API'de relatedNews varsa onu kullan, yoksa aynı kategoriden al
   const relatedArticles = useMemo(() => {
     if (!newsItem || !newsList.length) return [];
@@ -134,7 +140,21 @@ function Detail() {
             <h1 className="detail-title gradient-text">{newsItem.title}</h1>
             <div className="meta-panel">
               <span>📅 {newsItem.date ?? '–'}</span>
-              <span>👁️ {newsItem.views ?? '–'} GÖRÜNTÜLENME</span>
+              {newsItem.importance != null ? (
+                <span
+                  className="detail-importance"
+                  title={`Önem: ${importanceToStars(newsItem.importance)}/5`}
+                  aria-label={`Önem seviyesi: ${importanceToStars(newsItem.importance)} yıldız`}
+                >
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="star" aria-hidden>
+                      {i < importanceToStars(newsItem.importance) ? '★' : '☆'}
+                    </span>
+                  ))}
+                </span>
+              ) : (
+                <span>⭐ –</span>
+              )}
               <span>⏱️ {newsItem.readTime ?? '–'} OKUMA</span>
             </div>
           </header>
@@ -154,12 +174,12 @@ function Detail() {
 
           <div className="content-body">
             <p className="news-spot-text">
-              {newsItem.description && typeof newsItem.description === 'string'
-                ? newsItem.description.split('.')[0] + '.'
+              {newsItem.shortSummary && typeof newsItem.shortSummary === 'string'
+                ? newsItem.shortSummary
                 : ''}
             </p>
             <div className="description-text">
-              {newsItem.description || ''}
+              {newsItem.longSummary || ''}
             </div>
           </div>
 

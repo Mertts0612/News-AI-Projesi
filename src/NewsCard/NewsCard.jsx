@@ -107,7 +107,7 @@ function NewsCard({ item, index }) {
       
       <h3>{item.title}</h3>
       
-      <p>{item.description}</p>
+      <p>{item.shortSummary}</p>
           {/* Önem yüzdesi */}
       
       <div className="card-footer">

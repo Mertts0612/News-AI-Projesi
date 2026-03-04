@@ -65,6 +65,7 @@
 /* İstatistik Paneli - Hem siyahta hem beyazda görünür orta ton */
 .meta-panel {
     display: flex;
+    align-items: center;
     gap: 2rem;
     justify-content: flex-start !important;
     border-top: 1px solid rgba(128, 128, 128, 0.25) !important; 
@@ -72,6 +73,18 @@
     padding: 1.5rem 0;
     margin-bottom: 3rem;
     width: 100%;
+}
+
+.meta-panel .detail-importance {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.05rem;
+}
+
+.meta-panel .detail-importance .star {
+    font-size: 1em;
+    line-height: 1;
+    color: #facc15;
 }
 /* Görsel Kapsayıcısı */
 .news-image-wrapper {
@@ -218,7 +231,16 @@
     gap: 1rem;
 }
 
-[data-theme="light"] .meta-panel span {
+[data-theme="light"] .meta-panel > span {
+    background: #f0f3f7;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: #4a4a4a;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+[data-theme="light"] .meta-panel > .detail-importance {
     background: #f0f3f7;
     padding: 8px 16px;
     border-radius: 50px;

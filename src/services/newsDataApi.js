@@ -9,6 +9,19 @@ import axios from 'axios';
 
 const NEWS_DATA_URL = '/src/Data/newsData.json';
 
+function normalizeNewsItem(item) {
+  if (!item || typeof item !== 'object') return item;
+
+  const longSummary = item.longSummary ?? '';
+  const shortSummary = item.shortSummary ?? longSummary;
+
+  return {
+    ...item,
+    shortSummary,
+    longSummary
+  };
+}
+
 const defaultCurrencies = {
   usd: { value: 33.45, change: 0.12 },
   eur: { value: 36.78, change: -0.08 },
@@ -41,7 +54,7 @@ export async function getNewsData() {
         }
       : defaultWeather;
     return {
-      news: Array.isArray(data?.news) ? data.news : [],
+      news: Array.isArray(data?.news) ? data.news.map(normalizeNewsItem) : [],
       currencies: data?.currencies && typeof data.currencies === 'object'
         ? {
             usd: { value: Number(data.currencies.usd?.value ?? defaultCurrencies.usd.value), change: Number(data.currencies.usd?.change ?? 0) },
