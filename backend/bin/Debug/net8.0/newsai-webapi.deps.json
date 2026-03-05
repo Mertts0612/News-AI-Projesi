@@ -10,7 +10,8 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "8.0.2",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.2",
-          "System.ServiceModel.Syndication": "10.0.2"
+          "System.ServiceModel.Syndication": "10.0.2",
+          "pythonnet": "3.0.5"
         },
         "runtime": {
           "newsai-webapi.dll": {}
@@ -329,6 +330,14 @@
           }
         }
       },
+      "pythonnet/3.0.5": {
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "assemblyVersion": "3.0.5.0",
+            "fileVersion": "3.0.5.0"
+          }
+        }
+      },
       "System.CodeDom/4.4.0": {
         "runtime": {
           "lib/netstandard2.0/System.CodeDom.dll": {
@@ -510,6 +519,13 @@
       "sha512": "sha512-eoZPynwkZTWFTgnocvXORuCL2yFZtscrUdqVhjxiRULpC7BMg9zhLM5oDZAU5PoX1PgN77hmkKE4a3PQiHqh7Q==",
       "path": "npgsql.entityframeworkcore.postgresql/8.0.2",
       "hashPath": "npgsql.entityframeworkcore.postgresql.8.0.2.nupkg.sha512"
+    },
+    "pythonnet/3.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-20UVeB1uDpvCHZi8yNv7VCSUKVRRaxPZWFYhkO+BjfBB9GgOh2vEeucy3U7zTY8xEVCHf2XHpRNfAU/3quxXZw==",
+      "path": "pythonnet/3.0.5",
+      "hashPath": "pythonnet.3.0.5.nupkg.sha512"
     },
     "System.CodeDom/4.4.0": {
       "type": "package",

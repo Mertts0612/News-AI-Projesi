@@ -7,7 +7,7 @@ namespace newsai_webapi.Services
 {
     public class WeatherService
     {
-        private readonly string _apiKey = "API_KEY_HERE";
+        private readonly string _apiKey = "ANAHTAR_BURAYA";
 
         public async Task<WeatherResponse> GetWeatherAsync(double lat, double lon)
         {

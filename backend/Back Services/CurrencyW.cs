@@ -66,7 +66,6 @@ namespace newsai_webapi.Workers
             }
             catch (Exception ex)
             {
-                // Veritabanı veya işlem hataları
                 var innerMsg = ex.InnerException != null ? ex.InnerException.Message : "Ek detay yok.";
                 Console.WriteLine("KRİTİK VERİTABANI HATASI!");
                 Console.WriteLine($"Hata Mesajı: {ex.Message}");

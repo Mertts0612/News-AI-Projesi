@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\models\\spordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:models\\spordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\services\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:services\\currencyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\services\\rssservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:services\\rssservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\models\\newsdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:models\\newsdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\models\\currencydata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:models\\currencydata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\back services\\sporw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:back services\\sporw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\back services\\newsw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,6 +21,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\back services\\currencyw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:back services\\currencyw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\services\\weatherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:services\\weatherservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|c:\\users\\lenovo\\news-ai-projesi\\backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AAC94CA-77A5-2FA5-B65B-1BBD590C7BB3}|newsai-webapi.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,136 +38,96 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RssService.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\RssService.cs",
-              "RelativeDocumentMoniker": "Services\\RssService.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\RssService.cs",
-              "RelativeToolTip": "Services\\RssService.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAQwH0AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:57:57.919Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CurrencyService.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\CurrencyService.cs",
-              "RelativeDocumentMoniker": "Services\\CurrencyService.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\CurrencyService.cs",
-              "RelativeToolTip": "Services\\CurrencyService.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAQwHEAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:56:13.348Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "NewsData.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Models\\NewsData.cs",
-              "RelativeDocumentMoniker": "Models\\NewsData.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Models\\NewsData.cs",
-              "RelativeToolTip": "Models\\NewsData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:54:27.212Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CurrencyData.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Models\\CurrencyData.cs",
-              "RelativeDocumentMoniker": "Models\\CurrencyData.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Models\\CurrencyData.cs",
-              "RelativeToolTip": "Models\\CurrencyData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:53:40.7Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AppDBContext.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Data\\AppDBContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDBContext.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Data\\AppDBContext.cs",
-              "RelativeToolTip": "Data\\AppDBContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:53:19.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "newscontroller.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Controllers\\newscontroller.cs",
-              "RelativeDocumentMoniker": "Controllers\\newscontroller.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Controllers\\newscontroller.cs",
-              "RelativeToolTip": "Controllers\\newscontroller.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAA7wGkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:51:31.929Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "NewsW.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\NewsW.cs",
-              "RelativeDocumentMoniker": "Back Services\\NewsW.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\NewsW.cs",
-              "RelativeToolTip": "Back Services\\NewsW.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAgwHQAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:49:06.984Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "EquakeW.cs",
               "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\EquakeW.cs",
               "RelativeDocumentMoniker": "Back Services\\EquakeW.cs",
               "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\EquakeW.cs",
               "RelativeToolTip": "Back Services\\EquakeW.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAgwHEAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:47:12.457Z",
+              "WhenOpened": "2026-03-05T09:20:00.086Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CurrencyW.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\CurrencyW.cs",
-              "RelativeDocumentMoniker": "Back Services\\CurrencyW.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\CurrencyW.cs",
-              "RelativeToolTip": "Back Services\\CurrencyW.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAgwG0AAAAJAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "WeatherService.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\WeatherService.cs",
+              "RelativeDocumentMoniker": "Services\\WeatherService.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Services\\WeatherService.cs",
+              "RelativeToolTip": "Services\\WeatherService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T06:45:41.32Z",
+              "WhenOpened": "2026-03-05T09:19:19.534Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
+              "Title": "SporData.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Models\\SporData.cs",
+              "RelativeDocumentMoniker": "Models\\SporData.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Models\\SporData.cs",
+              "RelativeToolTip": "Models\\SporData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T01:47:28.094Z",
+              "WhenOpened": "2026-03-04T18:28:11.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Data\\AppDBContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDBContext.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Data\\AppDBContext.cs",
+              "RelativeToolTip": "Data\\AppDBContext.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwA4AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T18:26:12.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SporW.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\SporW.cs",
+              "RelativeDocumentMoniker": "Back Services\\SporW.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\SporW.cs",
+              "RelativeToolTip": "Back Services\\SporW.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T18:18:59.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CurrencyW.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\CurrencyW.cs",
+              "RelativeDocumentMoniker": "Back Services\\CurrencyW.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\CurrencyW.cs",
+              "RelativeToolTip": "Back Services\\CurrencyW.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAowHAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-04T18:14:04.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NewsW.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\NewsW.cs",
+              "RelativeDocumentMoniker": "Back Services\\NewsW.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\News-AI-Projesi\\backend\\Back Services\\NewsW.cs",
+              "RelativeToolTip": "Back Services\\NewsW.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-01T15:40:18.984Z",
               "EditorCaption": ""
             }
           ]

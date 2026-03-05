@@ -83,6 +83,16 @@
   },
   {
     "ContainingType": "newsai_webapi.Controllers.NewsController",
+    "Method": "GetMatches",
+    "RelativePath": "api/News/matches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "newsai_webapi.Controllers.NewsController",
     "Method": "GetWeather",
     "RelativePath": "api/News/weather",
     "HttpMethod": "GET",

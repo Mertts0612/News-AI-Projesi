@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json; 
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -15,133 +17,120 @@ namespace newsai_webapi.Workers
 {
     public class NewsWorker : BackgroundService
     {
-        private readonly IServiceScopeFactory _scopeFactory;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly string _nlpApiUrl = "http://0.0.0.0:5000";
+        private readonly string _llmApiUrl = "http://0.0.0.0:8000";
 
-        // DİKKAT: AI servisi bitirince bu linki sana verecek. 
-        // Şimdilik test için localhost:8000 yazıyoruz.
-        private readonly string _fastApiUrl = "http://localhost:8000/process-news";
-
-        public NewsWorker(IServiceScopeFactory scopeFactory)
-        {
-            _scopeFactory = scopeFactory;
-        }
+        public NewsWorker(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                try
-                {
-                    Console.WriteLine("Haber Ajanı: İnternetten yeni haberler taranıyor...");
-                    await ProcessAndSaveNewsAsync();
-                    await CleanOldNewsAsync();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"❌ Haber Ajanı Hatası: {ex.Message}");
-                }
-
-                await Task.Delay(TimeSpan.FromHours(1), stoppingToken);
+                Console.WriteLine($"---AI Destekli Haber İşleme Aktif: {DateTime.Now} ---");
+                await ProcessAndSaveNewsAsync();
+                await Task.Delay(TimeSpan.FromMinutes(30), stoppingToken);
             }
         }
 
         private async Task ProcessAndSaveNewsAsync()
         {
-            using var scope = _scopeFactory.CreateScope();
-            var _context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            using var scope = _serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            var rssService = scope.ServiceProvider.GetRequiredService<RssService>();
 
-            var _rssService = scope.ServiceProvider.GetRequiredService<RssService>();
+            var rssNews = rssService.GetNews("");
+            var tumHaberlerListesi = rssNews.Select(x => new { title = x.Title }).ToList();
 
-            var rssHaberleri = _rssService.GetNews("");
-
-            using var httpClient = new HttpClient();
-
-            foreach (var item in rssHaberleri)
+            foreach (var item in rssNews)
             {
+                bool exists = context.News.Any(n => n.Title == item.Title);
+                if (exists) continue;
 
-                bool isExists = _context.News.Any(n => n.SourceUrl == item.SourceUrl);
-                if (isExists) continue;
-
-                var newsRequest = new
-                {
-                    title = item.Title,
-                    content = item.Description
-                };
-
-                var jsonRequest = JsonSerializer.Serialize(newsRequest);
-                var httpContent = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+                string finalDescription = item.Description;
+                string finalCategory = item.Category;
+                int finalImportance = 5; 
+                string finalReadTime = "2 dk";
+                bool finalIsVerified = false;
 
                 try
                 {
-                    var response = await httpClient.PostAsync(_fastApiUrl, httpContent);
+                    using var client = new HttpClient();
+                    client.Timeout = TimeSpan.FromSeconds(30);
 
-                    if (response.IsSuccessStatusCode)
+                    
+                    var nlpPayload = new
                     {
-                        var responseString = await response.Content.ReadAsStringAsync();
-                        using var doc = JsonDocument.Parse(responseString);
-                        var root = doc.RootElement;
-
-                        string aiCategory = root.TryGetProperty("category", out var cat) ? cat.GetString() : "Genel";
-                        string aiSummary = root.TryGetProperty("summary", out var sum) ? sum.GetString() : "Özet çıkarılamadı.";
-                        bool aiVerified = root.TryGetProperty("isVerified", out var ver) && ver.GetBoolean();
-
-                        var newHaber = new NewsData
-                        {
-                            Title = item.Title,
-                            Description = aiSummary,
-                            OriginalContent = item.Description,
-                            SourceUrl = item.SourceUrl,
-                            Category = aiCategory,
-                            IsVerified = aiVerified,
-                            PublishedAt = DateTime.UtcNow,
-                            Views = 0
-                        };
-
-                        _context.News.Add(newHaber);
-                        await _context.SaveChangesAsync();
-
-                        Console.WriteLine($"AI Onaylı Yeni Haber Eklendi: {item.Title}");
-                    }
-                }
-                catch (Exception)
-                {
-                    // YEDEK PLAN
-                    Console.WriteLine($"AI Kapalı! Yedek Plan Devrede, Ham Haber Kaydediliyor: {item.Title}");
-
-                    var fallbackHaber = new NewsData
-                    {
-                        Title = item.Title,
-                        Description = item.Description,
-                        OriginalContent = item.Description,
-                        SourceUrl = item.SourceUrl,
-                        Category = "Genel", 
-                        IsVerified = false,
-                        PublishedAt = DateTime.UtcNow,
-                        Views = 0,
-                        ImageUrl = item.ImageUrl
+                        content = item.Description,
+                        tumHaberler = tumHaberlerListesi
                     };
 
-                    _context.News.Add(fallbackHaber);
-                    await _context.SaveChangesAsync();
+                    var nlpResponse = await client.PostAsJsonAsync(_nlpApiUrl, nlpPayload);
+
+                    if (nlpResponse.IsSuccessStatusCode)
+                    {
+                        var nlpResult = await nlpResponse.Content.ReadFromJsonAsync<NlpResponse>();
+                        if (nlpResult != null)
+                        {
+                            finalCategory = nlpResult.kategori;
+                            finalImportance = nlpResult.onemPuani;
+                            finalReadTime = nlpResult.okumaSuresi;
+                            Console.WriteLine($"NLP: {nlpResult.haberBasligi} - Önem: {nlpResult.onemPuani}");
+                        }
+                    }
+
+                    var llmPayload = new { title = item.Title, content = item.Description, category = finalCategory };
+                    var llmResponse = await client.PostAsJsonAsync(_llmApiUrl, llmPayload);
+
+                    if (llmResponse.IsSuccessStatusCode)
+                    {
+                        var llmResult = await llmResponse.Content.ReadFromJsonAsync<LlmResponse>();
+                        if (llmResult != null)
+                        {
+                            finalDescription = llmResult.Summary;
+                            finalIsVerified = llmResult.IsVerified;
+                        }
+                    }
                 }
+                catch (Exception ex) { Console.WriteLine($"AI Hatası: {ex.Message}"); }
+
+
+                context.News.Add(new NewsData
+                {
+                    Title = item.Title,
+                    Description = finalDescription, 
+                    OriginalContent = item.Description, 
+                    SourceUrl = item.SourceUrl,
+                    ImageUrl = item.ImageUrl,
+                    Category = finalCategory,
+                    IsVerified = finalIsVerified,
+                    PublishedAt = item.PublishedAt,
+                    Views = 0,
+                    ReadTime = finalReadTime, 
+                    Importance = finalImportance, 
+                    Featured = finalImportance > 8 
+                });
             }
+
+            await context.SaveChangesAsync();
         }
 
-        // --- 3 AYLIK ARŞİV TEMİZLİĞİ ---
-        private async Task CleanOldNewsAsync()
+        private async Task CleanOldNewsAsync(AppDbContext context)
         {
-            using var scope = _scopeFactory.CreateScope();
-            var _context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-            var limitDate = DateTime.UtcNow.AddMonths(-3);
-            var oldNews = _context.News.Where(n => n.PublishedAt < limitDate).ToList();
-
-            if (oldNews.Any())
-            {
-                _context.News.RemoveRange(oldNews);
-                await _context.SaveChangesAsync();
-                Console.WriteLine($"🧹 Sistem Temizliği: 3 aydan eski {oldNews.Count} haber veritabanından kalıcı olarak silindi.");
-            }
+            var threeMonthsAgo = DateTime.UtcNow.AddMonths(-3);
+            var oldNews = context.News.Where(n => n.PublishedAt < threeMonthsAgo);
+            context.News.RemoveRange(oldNews);
+            await context.SaveChangesAsync();
         }
     }
+
+    public class NlpResponse
+    {
+        public string haberBasligi { get; set; } = "";
+        public string kategori { get; set; } = "";
+        public string okumaSuresi { get; set; } = "";
+        public int onemPuani { get; set; }
+    }
+
+    public class LlmResponse { public string Summary { get; set; } = ""; public bool IsVerified { get; set; } }
 }

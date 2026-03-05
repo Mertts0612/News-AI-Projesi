@@ -111,20 +111,13 @@ namespace newsai_webapi.Workers
         {
             try
             {
-                // BURASI AI İLE KONUŞTUĞUMUZ YER (Placeholder)
-                // Arkadaşın API'yi verince buraya HTTP isteği atıp AI'dan gelen cevabı alacağız.
-                // Şimdilik sistemin hata vermemesi için orijinal veriyi geri döndürüyoruz.
-
-                // Örnek: 
-                // var cleanText = await _aiService.Duzelt(rawLocation); 
-                // return cleanText;
+                //AI servisi çıkarılıcak.
 
                 return await Task.FromResult(rawLocation);
             }
             catch
             {
-                // Eğer AI sunucusunda bir çökme olursa NewsAI patlamasın diye
-                // yedek plan olarak ham veriyi kullanıyoruz.
+                //Yedek plan olarak ham veriyi kullanıyoruz.
                 return rawLocation;
             }
         }

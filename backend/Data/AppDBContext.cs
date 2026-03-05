@@ -8,10 +8,11 @@ namespace newsai_webapi.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-
         public DbSet<EquakeData> Earthquakes { get; set; }
         public DbSet<CurrencyData> Currencies { get; set; }
         public DbSet<NewsData> News { get; set; }
+
+        public DbSet<SporData> Matches { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

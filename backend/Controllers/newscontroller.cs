@@ -101,6 +101,15 @@ namespace newsai_webapi.Controllers
             }
         }
 
+        [HttpGet("matches")]
+        public IActionResult GetMatches()
+        {
+            var matches = _context.Matches
+                .OrderBy(m => m.MatchDate)
+                        .ToList();
+            return Ok(matches);
+        }
+
         [HttpGet("currencies")]
         public IActionResult GetCurrencies() => Ok(_context.Currencies.OrderBy(c => c.Id).ToList());
 

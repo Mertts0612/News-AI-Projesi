@@ -139,4 +139,5 @@ C:\Users\LENOVO\News-AI-Projesi\backend\obj\Debug\net8.0\refint\newsai-webapi.dl
 C:\Users\LENOVO\News-AI-Projesi\backend\obj\Debug\net8.0\newsai-webapi.pdb
 C:\Users\LENOVO\News-AI-Projesi\backend\obj\Debug\net8.0\newsai-webapi.genruntimeconfig.cache
 C:\Users\LENOVO\News-AI-Projesi\backend\obj\Debug\net8.0\ref\newsai-webapi.dll
+C:\Users\LENOVO\News-AI-Projesi\backend\bin\Debug\net8.0\Python.Runtime.dll
 C:\Users\LENOVO\News-AI-Projesi\backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
