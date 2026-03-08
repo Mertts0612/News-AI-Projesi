@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  news-app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=senin_api_anahtarin_buraya
+    volumes:
+      - .:/app
